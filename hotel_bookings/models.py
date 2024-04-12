@@ -27,7 +27,7 @@ class Hotel(models.Model):
     image = CloudinaryField('log_hotel_images')
     max_guests = models.PositiveIntegerField(default=1)
     rooms = models.PositiveIntegerField(default=1)
-    extras = models.ManyToManyField(Amenity)
+    extras = models.ManyToManyField(extras)
 
     def __str__(self):
         return self.name
