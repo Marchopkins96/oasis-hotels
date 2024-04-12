@@ -21,4 +21,5 @@ from hotel_bookings.views import base_view
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', base_view, name='base'),
+    path('accounts/', include('allauth.urls')),
 ]
