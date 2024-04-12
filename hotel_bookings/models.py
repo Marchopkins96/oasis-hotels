@@ -47,7 +47,8 @@ class Booking(models.Model):
     check_out_date = models.DateField()
     num_guests = models.PositiveIntegerField()
     breakfast_included = models.PositiveIntegerField(default=0, null=True)
-    kids_club_tickets = models.DecimalField(
+    kids_club_tickets = models.PositiveIntegerField(default=0, null=True)
+    total_price = models.DecimalField(
                   max_digits=8, decimal_places=2, default=0)
 
     def __str__(self):
