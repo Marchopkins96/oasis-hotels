@@ -35,6 +35,6 @@ def booking_create(request, hotel_id):
         form = BookingForm()
 
     context = {'hotel': hotel, 'form': form}
-    return render(request, 'booking.html', context)
+    return render(request, 'my_booking.html', context)
 
 
