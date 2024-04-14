@@ -2,32 +2,34 @@
 
 {% block content %}
 <div class="container">
-       <!--Heading-->
-        <div class="row">
-            <div class="col">
-                <h1 class="text-center custom-heading">Welcome to Oasis Hotels</h1>
+    <!--Heading-->
+    <div class="row">
+        <div class="col">
+            <h1 class="text-center custom-heading">Welcome to Oasis Hotels</h1>
+        </div>
+    </div>
+        <div class="d-flex justify-content-center">
+           <div class="row custom-row">
+               <div class="card">
+                <div class="card-body">
+                    <p>Reasons to choose Oasis Hotels</p>
+                    <ul class="list-group">
+                               
+                    </ul>
+                </div>
+                <div class="card-footer d-flex justify-content-center">
+                    {% if user.is_authenticated %}
+                    <button type="button" class="btn btn-success">Book Now</button>
+                    {% else %}
+                    <a href="#" class="btn btn-danger">Sign Up</a>
+                    {% endif %}
+                </div>  
             </div>
         </div>
-        <div class="row">
-           <div class="col-md-6 mb-2 mt-2">
-               <div class="card">
-                    <div class="card-body">
-                        <p>Reasons to choose Oasis Hotels</p>
-                        <ul class="list-group">
-                               
-                        </ul>
-                    </div>
-                    <div class="card-footer d-flex justify-content-center">
-                        {% if user.is_authenticated %}
-                        <button type="button" class="btn btn-success">Book Now</button>
-                        {% else %}
-                        <a href="#" class="btn btn-danger">Sign Up</a>
-                        {% endif %}
-                    </div>  
-               </div>
-           </div>
-        </div>
+    </div>
+</div>
 
+<div class="container d-flex justify-content-center">
     <div id="hotel-carousel" class="carousel slide" data-ride="carousel">
         <!-- Carousel items -->
         <div class="carousel-inner">
