@@ -38,7 +38,8 @@ body {
 }
 
 .custom-heading {
-    color: black;
+    color: #000;
+    margin-top: 1rem;
 }
 
 .carousel-item {
@@ -58,4 +59,15 @@ body {
     right: 0;
     padding: 10px;
     color: #fff;
+}
+
+/* Media Queries */
+
+/* Media Queries for max-width: 576px (small screens) */
+
+@media (max-width:576px) {
+
+    .custom-heading {
+        font-size: 1.5rem;
+    }
 }
