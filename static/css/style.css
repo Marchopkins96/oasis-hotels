@@ -65,6 +65,12 @@ body {
     color: #fff;
 }
 
+/* Footer */
+
+footer {
+    background-color: #27476e;
+}
+
 /* Media Queries */
 
 /* Media Queries for max-width: 576px (small screens) */
