@@ -65,6 +65,30 @@ body {
     color: #fff;
 }
 
+/* About section */
+
+.section-title {
+    color: #27476e;
+}
+
+.about-section p,
+.lake-tale-section p {
+    color: #27211b;
+    text-align: center;
+}
+
+.about-row {
+    border: 1px solid #27476e;
+    border-radius: 5px;
+    margin-bottom: 2rem;
+    background-color: #ffffff;
+}
+
+hr {
+    height: 4px;
+    background-color: #27476e;
+}
+
 /* Footer */
 
 footer {
