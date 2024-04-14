@@ -33,13 +33,17 @@ body {
     background-color: #c59d74;
 }
 
-.custom-row {
-    padding: 3rem 0;
-}
-
 .custom-heading {
     color: #000;
     margin-top: 1rem;
+}
+
+.card {
+    background-color: #fff;
+}
+
+#hotel-carousel {
+    width: 80%;
 }
 
 .carousel-item {
@@ -69,5 +73,14 @@ body {
 
     .custom-heading {
         font-size: 1.5rem;
+    }
+}
+
+/* Media Querie for max-width: 992px */
+
+@media (max-width: 992px) {
+    .card-body {
+        height: 20rem;
+        overflow: auto;
     }
 }
