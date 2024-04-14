@@ -1,7 +1,10 @@
+
+/*General Styling*/
 body {
     background-color: #aeecef;
 }
 
+/*Nav Bar*/
 .navbar {
     padding-left: 2rem;
     background-color: #27476e;
@@ -23,6 +26,10 @@ body {
 }
 
 .navbar-toggler {
+    background-color: #c59d74;
+}
+
+.dropdown-menu {
     background-color: #c59d74;
 }
 
