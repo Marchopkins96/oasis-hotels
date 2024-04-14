@@ -1,5 +1,29 @@
+body {
+    background-color: #aeecef;
+}
+
 .navbar {
-    padding: 1.5rem 8rem;
+    padding-left: 2rem;
+    background-color: #27476e;
+}
+
+.navbar-logo {
+    max-height: 3.5rem;
+    max-width: auto;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.nav-link {
+    color: #ffffff;
+}
+
+.nav-link:hover {
+    color: #aeecef;
+}
+
+.navbar-toggler {
+    background-color: #c59d74;
 }
 
 .custom-row {
@@ -7,7 +31,7 @@
 }
 
 .custom-heading {
-    color: green;
+    color: black;
 }
 
 .carousel-item {
