@@ -47,8 +47,32 @@ h1, h2 {
 }
 
 /* Carousel */
+
+.carousel-container {
+    padding: 2rem 0;
+}
+
+.carousel-container img {
+    border: 3px solid #27476e;
+    border-radius: 15px;
+}
+
 #hotel-carousel {
     width: 80%;
+}
+
+.carousel-caption {
+    background-color: rgba(0, 0, 0, 0.6);
+    z-index: 1;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 10px;
+    border: 3px solid #27476e;
+    border-top: none;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
 }
 
 .carousel-item {
@@ -108,5 +132,14 @@ footer {
 
     .custom-heading {
         font-size: 1.5rem;
+    }
+}
+
+/* Media Queries for max-width: 767px (medium screens) */
+
+@media (max-width:767px) {
+
+    #cabin-carousel {
+        width: 100%;
     }
 }
