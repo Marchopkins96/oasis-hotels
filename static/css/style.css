@@ -1,6 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Hind+Siliguri:wght@600&display=swap');
+
 /*General Styling*/
 body {
     background-color: #aeecef;
+    font-family: 'Hind', 'Siliguri', serif;
 }
 
 /*Nav Bar*/
