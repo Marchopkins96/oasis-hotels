@@ -1,6 +1,14 @@
 /*General Styling*/
 body {
     background-color: #aeecef;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    ;
+}
+
+.content {
+    flex: 1 0 auto;
 }
 
 h1, h2 {
@@ -29,11 +37,12 @@ h1, h2 {
 }
 
 .navbar-toggler {
-    background-color: #c59d74;
+    background-color: #aeecef;
 }
 
 .dropdown-menu {
-    background-color: #c59d74;
+    background-color: #aeecef;
+    ;
 }
 
 /* Main Heading */
@@ -58,7 +67,7 @@ h1, h2 {
 }
 
 #hotel-carousel {
-    width: 80%;
+    width: 65%;
 }
 
 .carousel-caption {
@@ -69,7 +78,7 @@ h1, h2 {
     left: 0;
     right: 0;
     padding: 10px;
-    border: 3px solid #27476e;
+    border: 5px solid #27476e;
     border-top: none;
     border-bottom-left-radius: 15px;
     border-bottom-right-radius: 15px;
@@ -122,6 +131,18 @@ hr {
 
 footer {
     background-color: #27476e;
+    text-align: center;
+    padding-top: 0.5rem;
+}
+
+footer i {
+    color: #aeecef;
+    font-size: 2rem;
+    transition: opacity 0.3s ease;
+}
+
+footer i:hover {
+    opacity: 0.5;
 }
 
 /* Media Queries */
