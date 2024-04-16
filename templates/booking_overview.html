@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Booking Overview
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h2 class="text-center custom-heading">My Bookings</h2>
+    <div class="row">
+        {% if bookings %}
+        {% for booking in bookings %}
+        <div class="col-md-4 mb-4">
+            <div class="card">
+                <img src="{{ booking.hotel.image.url }}" class="card-img-top" alt="{{ booking.hotel.name }}">
+                <div class="card-body">
+                    <h5 class="card-title">{{ booking.hotel.name }}</h5>
+                    <p class="card-text">{{ booking.hotel.description }}</p>
+                    <p class="card-text">Booking ID: {{ booking.id }}</p>
+                    <p class="card-text">Check In Date: {{ booking.check_in_date }}</p>
+                    <p class="card-text">Check Out Date: {{ booking.check_out_date }}</p>
+                    <p class="card-text">Guests: {{ booking.num_guests }}</p>
+                    <div class="btn-group">
+                        <a href="#" class="btn btn-primary btn-sm">Edit</a>
+                        <a href="#" class="btn btn-danger btn-sm">Delete</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+        {% else %}
+        <p>No bookings found.</p>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

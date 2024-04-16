@@ -47,4 +47,6 @@ def booking_success(request, hotel_id, booking_id):
     context = {'hotel': Hotel, 'booking': booking, 'num_guests': num_guests, 'check_in_date': check_in_date, 'check_out_date': check_out_date}  # noqa
     return render(request, 'booking_success.html', context)
 
-
+def booking_overview(request):
+    bookings = Booking.objects.filter(user=request.user)
+    return render(request, 'booking_success.html', {'bookings': bookings})
