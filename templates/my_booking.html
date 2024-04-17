@@ -14,6 +14,7 @@ Hotel Booking
                 <div class="card-body">
                     <h5 class="card-title">{{ hotel.name }}</h5>
                     <p class="card-text">{{ hotel.description }}</p>
+                    <p class="card-text">Maximum Guests: {{hotel.max_guests}} </p>
                     <p class="card-text">Price: £ {{hotel.price}} </p>
                     <form method="POST" action="{% url 'my_booking' hotel.id %}">
                         {% csrf_token %}
