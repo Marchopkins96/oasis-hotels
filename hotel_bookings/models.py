@@ -45,7 +45,7 @@ class Booking(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     check_in_date = models.DateField()
     check_out_date = models.DateField()
-    num_guests = models.PositiveIntegerField()
+    num_guests = models.PositiveIntegerField(default=1)
     breakfast_included = models.PositiveIntegerField(default=0, null=True)
     kids_club_tickets = models.PositiveIntegerField(default=0, null=True)
     total_price = models.DecimalField(
