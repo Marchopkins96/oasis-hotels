@@ -30,6 +30,12 @@ def booking_create(request, hotel_id):
             booking = form.save(commit=False)
             booking.hotel = hotel
             booking.user = request.user
+
+            num_guests = form.cleaned_data['num_guests']
+            if num_guests > hotel.max_guests:
+                form.add_error('num_guests', "The number of guests entered exceeds the maximum allowed")  # noqa
+                context = {'hotel': hotel, 'form': form}
+                return render(request, 'my_booking.html', context)
             booking.save()
             return redirect('booking_success', hotel_id=hotel.id, booking_id=booking.id)  # noqa
     else:
@@ -61,6 +67,12 @@ def edit_booking(request, booking_id):
     if request.method == 'POST':
         form = BookingForm(request.POST, instance=booking)
         if form.is_valid():
+            num_guests = form.cleaned_data['num_guests']
+            if num_guests > booking.hotel.max_guests:
+                form.add_error('num_guests', "The number of guests entered exceeds the maximum allowed")  # noqa
+                context = {'form': form, 'booking': booking}
+                return render(request, 'edit_booking.html', context)
+
             form.save()
             return redirect('booking_overview')
     else:
