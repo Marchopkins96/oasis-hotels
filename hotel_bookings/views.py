@@ -48,6 +48,7 @@ def booking_success(request, hotel_id, booking_id):
     context = {'hotel': Hotel, 'booking': booking, 'num_guests': num_guests, 'check_in_date': check_in_date, 'check_out_date': check_out_date}  # noqa
     return render(request, 'booking_success.html', context)
 
+@login_required
 def booking_overview(request):
     bookings = Booking.objects.filter(user=request.user)
     return render(request, 'booking_success.html', {'bookings': bookings})
@@ -65,5 +66,5 @@ def edit_booking(request, booking_id):
     else:
         form = BookingForm(instance=booking)
         context = {'form': form, 'booking': booking}
-        
+
     return render(request, 'edit_booking.html', context)
