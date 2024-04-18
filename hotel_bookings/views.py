@@ -38,11 +38,20 @@ def booking_create(request, hotel_id):
             if num_guests > hotel.max_guests:
                 form.add_error('num_guests', "The number of guests entered exceeds the maximum allowed.")  # noqa
                 messages.warning(request, "The number of guests entered exceeds the maximum amount allowed.")  # noqa
-                context = {'hotel': hotel, 'form': form}
-                return render(request, 'my_booking.html', context)
-            booking.save()
-            messages.success(request, "New booking created successfully.")
-            return redirect('booking_success', hotel_id=hotel.id, booking_id=booking.id)  # noqa
+            else:
+                # Check if the hotel is already booked for the selected dates
+                existing_bookings = Booking.objects.filter(
+                    hotel=hotel,
+                    check_in_date__lte=booking.check_out_date,
+                    check_out_date__gte=booking.check_in_date,
+                )
+                if existing_bookings.exists():
+                    form.add_error(None, "The hotel is already booked for the selected dates.")  # noqa
+                    messages.warning(request, "The hotel is already booked for the selected dates.")  # noqa
+                else:
+                    booking.save()
+                    messages.success(request, "New booking created successfully.")  # noqa
+                    return redirect('booking_success', hotel_id=hotel.id, booking_id=booking.id)  # noqa    
         else:
             messages.warning(request, "Please select a future check-in and check-out date.")  # noqa
     else:
