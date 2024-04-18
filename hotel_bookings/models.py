@@ -53,3 +53,9 @@ class Booking(models.Model):
 
     def __str__(self):
         return f"Booking {self.id} - Hotel: {self.hotel.name}, User: {self.user.username}"  # noqa
+
+    def clean(self):
+        if self.check_in_date < timezone.now().date():
+            raise ValidationError('Please select a future check-in date.')
+        if self.check_out_date < self.check_in_date:
+            raise ValidationError('Check-out date cannot be earlier than the check-in date.')  # noqa

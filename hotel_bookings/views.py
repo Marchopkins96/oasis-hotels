@@ -41,6 +41,8 @@ def booking_create(request, hotel_id):
             booking.save()
             messages.success(request, "New booking created successfully.")
             return redirect('booking_success', hotel_id=hotel.id, booking_id=booking.id)  # noqa
+        else:
+            messages.warning(request, "Please select a future check-in and check-out date.")  # noqa
     else:
         form = BookingForm()
 
@@ -64,8 +66,8 @@ def booking_overview(request):
 
 @login_required
 def edit_booking(request, booking_id):
-
     booking = get_object_or_404(Booking, id=booking_id, user=request.user)
+    context = {'form': None, 'booking': booking}
 
     if request.method == 'POST':
         form = BookingForm(request.POST, instance=booking)
@@ -74,16 +76,17 @@ def edit_booking(request, booking_id):
             if num_guests > booking.hotel.max_guests:
                 form.add_error('num_guests', "The number of guests entered exceeds the maximum allowed")  # noqa
                 messages.warning(request, "The number of guests entered exceeds the maximum amount allowed.")  # noqa
-                context = {'form': form, 'booking': booking}
-                return render(request, 'edit_booking.html', context)
-
-            form.save()
-            messages.success(request, "Booking updated successfully.")
-            return redirect('booking_overview')
+            else:
+                form.save()
+                messages.success(request, "Booking updated successfully.")
+                return redirect('booking_overview')
+        else:
+            messages.warning(request, "Please select a future check-in and check-out date.")  # noqa
     else:
         form = BookingForm(instance=booking)
         context = {'form': form, 'booking': booking}
 
+    context['form'] = form
     return render(request, 'edit_booking.html', context)
 
 @login_required
