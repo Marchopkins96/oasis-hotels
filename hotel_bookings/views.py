@@ -37,7 +37,10 @@ def booking_create(request, hotel_id):
             booking.user = request.user
 
             num_guests = form.cleaned_data['num_guests']
-            if num_guests > hotel.max_guests:
+            if num_guests <= 0:
+                form.add_error('num_guests', "The number of guests must be greater than zero.")  # noqa
+                messages.warning(request, "The number of guests must be greater than zero.")  # noqa
+            elif num_guests > booking.hotel.max_guests:
                 form.add_error('num_guests', "The number of guests entered exceeds the maximum allowed.")  # noqa
                 messages.warning(request, "The number of guests entered exceeds the maximum amount allowed.")  # noqa
             else:
@@ -112,20 +115,56 @@ def edit_booking(request, booking_id):
         form = BookingForm(request.POST, instance=booking)
         if form.is_valid():
             num_guests = form.cleaned_data['num_guests']
-            if num_guests > booking.hotel.max_guests:
+            if num_guests <= 0:
+                form.add_error('num_guests', "The number of guests must be greater than zero.")  # noqa
+                messages.warning(request, "The number of guests must be greater than zero.")  # noqa
+            elif num_guests > booking.hotel.max_guests:
                 form.add_error('num_guests', "The number of guests entered exceeds the maximum allowed")  # noqa
                 messages.warning(request, "The number of guests entered exceeds the maximum amount allowed.")  # noqa
             else:
-                form.save()
-                messages.success(request, "Booking updated successfully.")
-                return redirect('booking_overview')
+                check_in_date = form.cleaned_data['check_in_date']
+                check_out_date = form.cleaned_data['check_out_date']
+                today = timezone.now().date()
+                if check_in_date < today:
+                    form.add_error('check_in_date', "Please select a future check-in date.")  # noqa
+                    messages.warning(request, "Please select a future check-in date.")  # noqa
+                elif check_out_date < check_in_date:
+                    form.add_error('check_out_date', "Check-out date cannot be earlier than the check-in date.")  # noqa
+                    messages.warning(request, "Check-out date cannot be earlier than the check-in date.")  # noqa
+                elif check_in_date == check_out_date:
+                    form.add_error('check_out_date', "Check-out date cannot be the same as the check-in date.")  # noqa
+                    messages.warning(request, "Check-out date cannot be the same as the check-in date.")  # noqa
+                else:
+                    overlapping_bookings = booked_dates.filter(
+                        check_in_date__lte=check_out_date,
+                        check_out_date__gte=check_in_date
+                    )
+
+                    if overlapping_bookings.exists():
+                        form.add_error(None, "The hotel is already booked for the selected dates.")  # noqa
+                        messages.warning(request, "The hotel is already booked for the selected dates.")  # noqa
+                    else:
+                        form.save()
+                        messages.success(request, "Booking updated successfully.")  # noqa
+                        return redirect('booking_overview')
         else:
-            messages.warning(request, "Please select a future check-in and check-out date.")  # noqa
+            for field, errors in form.errors.items():
+                for error in errors:
+                    if field != '__all__':
+                        messages.warning(request, f"{form[field].label}: {error}")  # noqa
     else:
         form = BookingForm(instance=booking)
-        context = {'form': form, 'booking': booking}
+    
+    booked_dates = booked_dates.values_list('check_in_date', 'check_out_date')
+    booked_dates_str = [[str(check_in_date), str(check_out_date)] for check_in_date, check_out_date in booked_dates]  # noqa
 
-    context['form'] = form
+    context = {
+        'form': form,
+        'booking': booking,
+        'booked_dates': booked_dates,
+        'booked_dates_json': json.dumps(booked_dates_str),
+    }
+    
     return render(request, 'edit_booking.html', context)
 
 @login_required
