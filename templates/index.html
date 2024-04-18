@@ -36,7 +36,10 @@
             <div class="carousel-inner">
                 {% for hotel in hotels %}
                 <div class="carousel-item {% if forloop.first %}active{% endif %}">
-                    <img src="{{ hotel.image.url }}" class="d-block w-100" alt="{{ hotel.name }}">
+                    <a {% if user.is_authenticated %}href="{% url 'hotel_booking' %}"
+                            {% else %}href="{% url 'account_signup' %}" {% endif %}>
+                            <img src="{{ hotel.image.url }}" class="d-block w-100" alt="{{ hotel.name }}">
+                        </a>
                     <div class="carousel-caption">
                         <h3>{{ hotel.name }}</h3>
                         <p>{{ hotel.description }}</p>
