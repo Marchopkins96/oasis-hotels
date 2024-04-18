@@ -21,5 +21,17 @@ Hotel Booking
         </div>
         {% endfor %}
     </div>
+    <!-- Carousel Pagination controls -->
+    <div class="pagination justify-content-center mb-2">
+        <div class="mr-5">
+            <span class="current-page text-white">Page: {{ hotels.number }}</span>
+        </div>
+        {% if hotels.has_previous %}
+        <a href="?page={{ hotels.previous_page_number }}" class="btn btn-dark">Previous</a>
+        {% endif %}
+        {% if hotels.has_next %}
+        <a href="?page={{ hotels.next_page_number }}" class="btn btn-dark">Next</a>
+        {% endif %}
+    </div>
 </div>
 {% endblock %}
