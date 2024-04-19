@@ -104,7 +104,7 @@ def booking_success(request, hotel_id, booking_id):
 @login_required
 def booking_overview(request):
     bookings = Booking.objects.filter(user=request.user)
-    return render(request, 'booking_success.html', {'bookings': bookings})
+    return render(request, 'booking_overview.html', {'bookings': bookings})
 
 @login_required
 def edit_booking(request, booking_id):
