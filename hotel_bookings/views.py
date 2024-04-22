@@ -196,6 +196,7 @@ def booking_overview(request):
 @login_required
 def edit_booking(request, booking_id):
     booking = get_object_or_404(Booking, id=booking_id, user=request.user)
+    booked_dates = Booking.objects.filter(hotel=booking.hotel).exclude(id=booking_id)  # noqa
     context = {'form': None, 'booking': booking}
 
     if request.method == 'POST':
