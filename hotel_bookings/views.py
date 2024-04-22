@@ -174,13 +174,17 @@ def booking_success(request, hotel_id, booking_id):
     num_guests = booking.num_guests
     check_in_date = booking.check_in_date
     check_out_date = booking.check_out_date
+    breakfast_included = booking.breakfast_included
+    kids_club_tickets = booking.kids_club_tickets
 
     context = {
         'hotel': Hotel,
         'booking': booking,
         'num_guests': num_guests,
         'check_in_date': check_in_date,
-        'check_out_date': check_out_date
+        'check_out_date': check_out_date,
+        'breakfast_included': breakfast_included,
+        'kids_club_tickets': kids_club_tickets,
     }
     return render(request, 'booking_success.html', context)
 
