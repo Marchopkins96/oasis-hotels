@@ -17,7 +17,7 @@ Hotel Booking
                     <p class="card-text">Maximum Guests: {{hotel.max_guests}} </p>
                     <p class="card-text">Price: £ {{hotel.price}} </p>
                     {% if hotel.extras.exists %}
-                    <p class="card-text">Extras:</p>
+                    <p class="card-text">Extras (optional):</p>
                     <ul>
                         {% for extra in hotel.extras.all %}
                         <li>{{ extra.name }} Price: £ {{ extra.price }}</li>
