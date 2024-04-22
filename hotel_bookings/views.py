@@ -12,6 +12,9 @@ from .models import Hotel, Booking
 class Home(generic.TemplateView):
     template_name = 'index.html'
 
+def contact_view(request):
+    return render(request, 'contact.html')
+
 
 def hotel_list(request):
     hotels = Hotel.objects.all()
