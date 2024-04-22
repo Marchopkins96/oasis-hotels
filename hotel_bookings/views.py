@@ -7,7 +7,7 @@ from django.utils import timezone
 import json
 from django.views import generic, View
 from .forms import BookingForm
-from .models import Hotel, Booking
+from .models import Hotel, Booking, Extras
 
 class Home(generic.TemplateView):
     template_name = 'index.html'
@@ -21,7 +21,7 @@ def hotel_list(request):
     return render(request, 'index.html', {'hotels': hotels})
 
 def hotel_booking(request):
-    all_hotels = Hotel.objects.all()
+    all_hotels = Hotel.objects.all().prefetch_related('extras')
     paginator = Paginator(all_hotels, 6)  # Display 6 cabins per page
     page_number = request.GET.get('page')
     hotels = paginator.get_page(page_number)
@@ -105,6 +105,31 @@ def booking_create(request, hotel_id):
                             "The hotel is already booked for the selected dates."
                         )
                     else:
+                        breakfast_included = form.cleaned_data.get(
+                                                   'breakfast_included')
+                        kids_club_tickets = form.cleaned_data.get('kids_club_tickets')
+
+                    if breakfast_included and breakfast_included < 0:  # noqa
+                        form.add_error(
+                            'breakfast_included',
+                            "Breakfast included cannot be negative."
+                        )
+                        messages.warning(
+                            request,
+                            "Breakfast included cannot be negative."
+                        )
+
+                    if kids_club_tickets and kids_club_tickets < 0:
+                        form.add_error(
+                            'kids_club_tickets',
+                            "The number of kids club tickets cannot be negative."
+                        )
+                        messages.warning(
+                            request,
+                            "The number of kids club tickets cannot be negative."
+                        )
+
+                    if not form.errors:
                         booking.save()
                         messages.success(
                             request,
