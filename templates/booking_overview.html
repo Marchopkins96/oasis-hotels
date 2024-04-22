@@ -21,6 +21,12 @@ Booking Overview
                     <p class="card-text">Check Out Date: {{ booking.check_out_date }}</p>
                     <p class="card-text">Guests: {{ booking.num_guests }}</p>
                     <p class="card-text">Price: £ {{ booking.hotel.price }}</p>
+                    {% if booking.breakfast_included %}
+                    <p class="card-text">Breakfast Included: {{ booking.breakfast_included }}</p>
+                    {% endif %}
+                    {% if booking.kids_club_tickets %}
+                    <p class="card-text">Kids Club Tickets: {{ booking.kayak_rentals }}</p>
+                    {% endif %}
                     <div class="btn-group">
                         <a href="{% url 'edit_booking' booking.id %}" class="btn btn-primary btn-sm">Edit</a>
                         <a href="{% url 'delete_booking' booking.id %}" class="btn btn-danger btn-sm">Delete</a>
