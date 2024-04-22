@@ -16,6 +16,14 @@ Hotel Booking
                     <p class="card-text">{{ hotel.description }}</p>
                     <p class="card-text">Maximum Guests: {{hotel.max_guests}} </p>
                     <p class="card-text">Price: £ {{hotel.price}} </p>
+                    {% if hotel.extras.exists %}
+                    <p class="card-text">Extras:</p>
+                    <ul>
+                        {% for extra in hotel.extras.all %}
+                        <li>{{ extra.name }} Price: £ {{ extra.price }}</li>
+                        {% endfor %}
+                    </ul>
+                    {% endif %}
                     <form method="POST" action="{% url 'my_booking' hotel.id %}">
                         {% csrf_token %}
                         <div class="form-group row">
@@ -48,6 +56,19 @@ Hotel Booking
                             <label for="guests" class="col-sm-4 col-form-label">Number of Guests</label>
                             <div class="col-sm-8">
                                 <input type="number" class="form-control" id="guests" name="num_guests" required>
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="breakfast" class="col-sm-4 col-form-label">Breakfast Included</label>
+                            <div class="col-sm-8">
+                                <input type="number" class="form-control" id="breakfast"
+                                    name="breakfast_included">
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label for="kids-club-tickets" class="col-sm-4 col-form-label">Kids Club Tickets</label>
+                            <div class="col-sm-8">
+                                <input type="number" class="form-control" id="kids-club-tickets" name="kids-club-tickets">
                             </div>
                         </div>
                         <div class="form-group row">
