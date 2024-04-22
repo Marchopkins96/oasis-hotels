@@ -109,35 +109,35 @@ def booking_create(request, hotel_id):
                                                    'breakfast_included')
                         kids_club_tickets = form.cleaned_data.get('kids_club_tickets')
 
-                    if breakfast_included and breakfast_included < 0:  # noqa
-                        form.add_error(
-                            'breakfast_included',
-                            "Breakfast included cannot be negative."
-                        )
-                        messages.warning(
-                            request,
-                            "Breakfast included cannot be negative."
-                        )
+                        if breakfast_included and breakfast_included < 0:  # noqa
+                            form.add_error(
+                                'breakfast_included',
+                                "Breakfast included cannot be negative."
+                            )
+                            messages.warning(
+                                request,
+                                "Breakfast included cannot be negative."
+                            )
 
-                    if kids_club_tickets and kids_club_tickets < 0:
-                        form.add_error(
-                            'kids_club_tickets',
-                            "The number of kids club tickets cannot be negative."
-                        )
-                        messages.warning(
-                            request,
-                            "The number of kids club tickets cannot be negative."
-                        )
+                        if kids_club_tickets and kids_club_tickets < 0:
+                            form.add_error(
+                                'kids_club_tickets',
+                                "The number of kids club tickets cannot be negative."
+                            )
+                            messages.warning(
+                                request,
+                                "The number of kids club tickets cannot be negative."
+                            )
 
-                    if not form.errors:
-                        booking.save()
-                        messages.success(
-                            request,
-                            "New booking created successfully."
-                        )
-                        return redirect(
-                            'booking_success',
-                            hotel_id=hotel.id, booking_id=booking.id
+                        if not form.errors:
+                            booking.save()
+                            messages.success(
+                                request,
+                                "New booking created successfully."
+                            )
+                            return redirect(
+                                'booking_success',
+                                hotel_id=hotel.id, booking_id=booking.id
                             )
         else:
             for field, errors in form.errors.items():
@@ -199,7 +199,10 @@ def edit_booking(request, booking_id):
     context = {'form': None, 'booking': booking}
 
     if request.method == 'POST':
-        form = BookingForm(request.POST, instance=booking)
+        form = form = BookingForm(request.POST, instance=booking, initial={
+            'breakfast_included': booking.breakfast_included,
+            'kids_club_tickets': booking.kids_club_tickets,
+        })
         if form.is_valid():
             num_guests = form.cleaned_data['num_guests']
             if num_guests <= 0:
@@ -254,11 +257,39 @@ def edit_booking(request, booking_id):
                             request,
                             "The hotel is already booked for the selected dates.")
                     else:
-                        form.save()
-                        messages.success(
-                            request,
-                            "Booking updated successfully.")
-                        return redirect('booking_overview')
+                        breakfast_included = form.cleaned_data.get(
+                                                   'breakfast_included')
+                        kids_club_tickets = form.cleaned_data.get('kids_club_tickets')
+                        if breakfast_included and (
+                           breakfast_included <
+                           0 or breakfast_included > num_guests):
+                            form.add_error(
+                                'breakfast_included',
+                                "Invalid number of breakfasts included."
+                            )
+                            messages.warning(
+                                request,
+                                "Invalid number of breakfasts included."
+                            )
+
+                        if kids_club_tickets and (
+                           kids_club_tickets < 0 or kids_club_tickets > 10):
+                            form.add_error(
+                                'kids_club_tickets',
+                                "Number of kids club tickets can't be negative."
+                            )
+                            messages.warning(
+                                request,
+                                "Number of kids club tickets can't be negative."
+                            )
+
+                        if not form.errors:
+                            form.save()
+                            messages.success(
+                                request,
+                                "Booking updated successfully."
+                            )
+                            return redirect('booking_overview')
         else:
             for field, errors in form.errors.items():
                 for error in errors:
