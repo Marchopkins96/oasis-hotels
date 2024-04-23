@@ -177,7 +177,7 @@ def booking_success(request, hotel_id, booking_id):
     kids_club_tickets = booking.kids_club_tickets
 
     context = {
-        'hotel': hotel,
+        'hotel': Hotel,
         'booking': booking,
         'num_guests': num_guests,
         'check_in_date': check_in_date,
@@ -212,7 +212,7 @@ def edit_booking(request, booking_id):
                 messages.warning(
                     request,
                     "The number of guests must be greater than zero.")
-            elif num_guests > booking.cabin.max_guests:
+            elif num_guests > booking.hotel.max_guests:
                 form.add_error(
                     'num_guests',
                     "Exceeds maximum guests allowed.")
