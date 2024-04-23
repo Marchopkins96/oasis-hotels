@@ -25,7 +25,7 @@ Booking Overview
                     <p class="card-text">Breakfast Included: {{ booking.breakfast_included }}</p>
                     {% endif %}
                     {% if booking.kids_club_tickets %}
-                    <p class="card-text">Kids Club Tickets: {{ booking.kayak_rentals }}</p>
+                    <p class="card-text">Kids Club Tickets: {{ booking.kids_club_tickets }}</p>
                     {% endif %}
                     <div class="btn-group">
                         <a href="{% url 'edit_booking' booking.id %}" class="btn btn-primary btn-sm">Edit</a>

@@ -129,7 +129,22 @@ def booking_create(request, hotel_id):
                                 "The number of kids club tickets cannot be negative."
                             )
 
+                        breakfast_included = breakfast_included or 0  # noqa
+                        kids_club_tickets = kids_club_tickets or 0
+
                         if not form.errors:
+                            duration = (check_out_date - check_in_date).days
+                            # Calculate total price based on duration
+                            total_price = hotel.price * duration
+
+                            total_price += (
+                                breakfast_included * Extra.objects.get(
+                                    name='Breakfast Included').price)
+                            total_price += (
+                                kids_club_tickets * Extra.objects.get(
+                                    name='Kids Club Tickets').price)
+
+                            booking.total_price = total_price
                             booking.save()
                             messages.success(
                                 request,
