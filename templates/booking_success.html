@@ -18,13 +18,13 @@ Booking Successful
                     <p class="card-text">Check In Date: {{ booking.check_in_date }}</p>
                     <p class="card-text">Check Out Date: {{ booking.check_out_date }}</p>
                     <p class="card-text">Guests: {{ booking.num_guests }}</p>
-                    <p class="card-text">Price: £ {{ booking.hotel.price }}</p>
                     {% if booking.breakfast_included %}
                     <p class="card-text">Breakfast Included: {{ booking.breakfast_included }} </p>
                     {% endif %}
                     {% if booking.kids_club_tickets %}
                     <p class="card-text">Kids Club Tickets: {{ booking.kids_club_tickets }} </p>
                     {% endif %}
+                    <p class="card-text text-uppercase">Total Price: £{{ booking.total_price }} </p>
                     <p class="card-text">If you have any questions or need further assistance, please contact us!</p>
                     <a href="{% url 'contact' %}" class="btn btn-info mb-1">Contact Us</a>
                     <a href="{% url 'booking_overview' %}" class="btn btn-success">My Bookings</a>
