@@ -120,14 +120,15 @@ def booking_create(request, hotel_id):
                                 "Breakfast included cannot exceed number of guests."
                             )
 
-                        if kids_club_tickets and kids_club_tickets < 0:
+                        if kids_club_tickets and (
+                                kids_club_tickets < 0 or kids_club_tickets > 10):
                             form.add_error(
                                 'kids_club_tickets',
-                                "The number of kids club tickets cannot be negative."
+                                "The number of kids club tickets ranges from 0 to 10."
                             )
                             messages.warning(
                                 request,
-                                "The number of kids club tickets cannot be negative."
+                                "The number of kids club tickets ranges from 0 to 10."
                             )
 
                         breakfast_included = breakfast_included or 0  # noqa
