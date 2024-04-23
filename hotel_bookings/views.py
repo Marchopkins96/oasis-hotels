@@ -30,24 +30,117 @@ def hotel_booking(request):
 
 @login_required
 def booking_create(request, hotel_id):
-    hotel = get_object_or_404(Hotel, id=hotel_id)
+    hotel = Hotel.objects.get(id=hotel_id)
 
     if request.method == 'POST':
         form = BookingForm(request.POST)
         if form.is_valid():
-            # Check if check-in and check-out dates are provided
-            check_in_date = form.cleaned_data['check_in_date']
-            check_out_date = form.cleaned_data['check_out_date']
+            booking = form.save(commit=False)
+            booking.hotel = hotel
+            booking.user = request.user
 
-            if not check_in_date:
-                messages.warning(request, "Please select a check-in date.")
-            elif not check_out_date:
-                messages.warning(request, "Please select a check-out date.")
+            num_guests = form.cleaned_data['num_guests']
+            if num_guests <= 0:
+                form.add_error(
+                    'num_guests',
+                    "The number of guests must be greater than zero."
+                )
+                messages.warning(
+                    request,
+                    "The number of guests must be greater than zero."
+                )
+            elif num_guests > booking.hotel.max_guests:
+                form.add_error(
+                    'num_guests',
+                    "Exceeds maximum guests allowed."
+                )
+                messages.warning(
+                    request,
+                    "Exceeds maximum guests allowed."
+                )
             else:
-                booking = process_booking_form(request, form, hotel)
-                if booking:
-                    return redirect('booking_success',
-                                    hotel_id=hotel.id, booking_id=booking.id)
+                check_in_date = form.cleaned_data['check_in_date']
+                check_out_date = form.cleaned_data['check_out_date']
+                today = timezone.now().date()
+
+                if check_in_date < today:
+                    form.add_error(
+                        'check_in_date',
+                        "Please select a future check-in date."
+                    )
+                    messages.warning(
+                        request,
+                        "Please select a future check-in date."
+                    )
+                elif check_out_date < check_in_date:
+                    form.add_error(
+                        'check_out_date',
+                        "Check-out date can't be earlier than check-in date."
+                    )
+                    messages.warning(
+                        request,
+                        "Check-out date can't be earlier than check-in date."
+                    )
+                elif check_in_date == check_out_date:
+                    form.add_error(
+                        'check_out_date',
+                        "Check-out date can't be the same as check-in date."
+                    )
+                    messages.warning(
+                        request,
+                        "Check-out date can't be the same as check-in date."
+                    )
+                else:
+                    existing_bookings = Booking.objects.filter(
+                        hotel=hotel,
+                        check_in_date__lte=check_out_date,
+                        check_out_date__gte=check_in_date,
+                    )
+                    if existing_bookings.exists():
+                        form.add_error(
+                            None,
+                            "Hotel already booked for the selected dates"
+                        )
+                        messages.warning(
+                            request,
+                            "Hotel already booked for the selected dates"
+                        )
+                    else:
+                        breakfast_included = form.cleaned_data.get(
+                                                   'breakfast_included')
+                        kids_club_tickets = form.cleaned_data.get('kids_club_tickets')
+
+                        if breakfast_included and breakfast_included < 0:  # noqa
+                            form.add_error(
+                                'breakfast_included',
+                                "Breakfast included can't be negative."
+                            )
+                            messages.warning(
+                                request,
+                                "Breakfast included can't be negative."
+                            )
+
+                        if kids_club_tickets and kids_club_tickets < 0:
+                            form.add_error(
+                                'kids_club_tickets',
+                                "Number of kids club tickets can't be negative."
+                            )
+                            messages.warning(
+                                request,
+                                "Number of kids club tickets can't be negative."
+                            )
+
+                        if not form.errors:
+                            booking.save()
+                            messages.success(
+                                request,
+                                "New booking created successfully."
+                            )
+                            return redirect(
+                                'booking_success',
+                                hotel_id=hotel.id,
+                                booking_id=booking.id
+                            )
         else:
             for field, errors in form.errors.items():
                 for error in errors:
@@ -56,105 +149,22 @@ def booking_create(request, hotel_id):
                             request,
                             f"{form[field].label}: {error}"
                         )
-    else:             
+    else:
         form = BookingForm()
-
-    booked_dates = Booking.objects.filter(
-                   hotel=hotel).values_list('check_in_date', 'check_out_date')
-    booked_dates_str = [[str(check_in_date),
-                         str(check_out_date)] for
-                        check_in_date, check_out_date in booked_dates]
-
+    booked_dates = Booking.objects.filter(hotel=hotel).values_list(
+        'check_in_date',
+        'check_out_date'
+    )
+    booked_dates_str = [
+        [str(check_in_date), str(check_out_date)]
+        for check_in_date, check_out_date in booked_dates
+    ]
     context = {
         'hotel': hotel,
         'form': form,
         'booked_dates_json': json.dumps(booked_dates_str),
     }
     return render(request, 'my_booking.html', context)
-
-
-@login_required
-def process_booking_form(request, form, hotel):
-    """
-    Process form data, perform validations, and create a new booking.
-    Returns the newly created booking if successful, or None otherwise.
-    """
-    booking = form.save(commit=False)
-    booking.hotel = hotel
-    booking.user = request.user
-
-    num_guests = form.cleaned_data['num_guests']
-    if num_guests <= 0:
-        form.add_error(
-            'num_guests', "The number of guests must be greater than zero.")
-        messages.warning(
-            request, "The number of guests must be greater than zero.")
-
-    elif num_guests > hotel.max_guests:
-        form.add_error('num_guests', "Exceeds maximum guests allowed.")
-        messages.warning(request, "Exceeds maximum guests allowed.")
-    else:
-        check_in_date = form.cleaned_data['check_in_date']
-        check_out_date = form.cleaned_data['check_out_date']
-        today = timezone.now().date()
-
-        if check_in_date < today:
-            form.add_error(
-                'check_in_date', "Please select a future check-in date.")
-            messages.warning(
-                request, "Please select a future check-in date.")
-        elif check_out_date < check_in_date:
-            form.add_error(
-                'check_out_date',
-                "Check-out date can't be earlier than check-in date.")
-            messages.warning(
-                request, "Check-out date can't be earlier than check-in date.")
-        elif check_in_date == check_out_date:
-            form.add_error(
-                'check_out_date',
-                "Check-out date can't be the same as check-in date.")
-            messages.warning(
-                request, "Check-out date can't be the same as check-in date.")
-        else:
-            booked_dates = Booking.objects.filter(
-                hotel=hotel).exclude(id=booking.id)
-
-            # Check for overlapping bookings
-            overlapping_bookings = booked_dates.filter(
-                check_in_date__lte=check_out_date,
-                check_out_date__gte=check_in_date
-            )
-
-            if overlapping_bookings.exists():
-                form.add_error(
-                    None, "Hotel already booked for the selected dates")
-                messages.warning(
-                    request, "Hotel already booked for the selected dates")
-            else:
-                # Check Extras validations
-                breakfast_included = form.cleaned_data.get(
-                    'breakfast_included') or 0
-                kids_club_tickets = form.cleaned_data.get('kids_club_tickets') or 0
-
-                if breakfast_included and (
-                        breakfast_included < 0 or
-                        breakfast_included > num_guests):
-                    form.add_error(
-                        'breakfast_included',
-                        "Breakfast included can't be negative.")
-                    messages.warning(
-                        request,
-                        "Breakfast included can't exceed the number of selected guests.")
-
-                if kids_club_tickets and (kids_club_tickets < 0 or kids_club_tickets > 10):
-                    form.add_error(
-                        'kids_club_tickets', "Kids Club tickets ranges from 0 to 10")
-                    messages.warning(
-                        request, "Kids club tickets ranges from 0 to 10")
-
-                    return booking
-
-    return None
 
 @login_required
 def booking_success(request, hotel_id, booking_id):
@@ -228,95 +238,6 @@ def edit_booking(request, booking_id):
     }
     
     return render(request, 'edit_booking.html', context)
-
-
-@login_required
-def update_booking(request, form, booking, booked_dates):
-    """
-    Updates an existing booking based on the provided form data
-    and validation rules.
-    """
-    num_guests = form.cleaned_data['num_guests']
-    if num_guests <= 0:
-        form.add_error(
-            'num_guests',
-            "The number of guests must be greater than zero.")
-        messages.warning(
-            request,
-            "The number of guests must be greater than zero.")
-    elif num_guests > booking.hotel.max_guests:
-        form.add_error('num_guests', "Exceeds maximum guests allowed.")
-        messages.warning(request, "Exceeds maximum guests allowed.")
-    else:
-        check_in_date = form.cleaned_data['check_in_date']
-        check_out_date = form.cleaned_data['check_out_date']
-        today = timezone.now().date()
-
-        # Check date validity
-        if check_in_date < today:
-            form.add_error(
-                'check_in_date',
-                "Please select a future check-in date.")
-            messages.warning(
-                request,
-                "Please select a future check-in date.")
-        elif check_out_date < check_in_date:
-            form.add_error(
-                'check_out_date',
-                "Check-out date can't be earlier than check-in date.")
-            messages.warning(
-                request,
-                "Check-out date can't be earlier than check-in date.")
-        elif check_in_date == check_out_date:
-            form.add_error(
-                'check_out_date',
-                "Check-out date can't be the same as check-in date.")
-            messages.warning(
-                request,
-                "Check-out date can't be the same as check-in date.")
-        else:
-            booked_dates = Booking.objects.filter(
-                hotel=booking.hotel).exclude(id=booking.id)
-
-            # Check for overlapping bookings
-            overlapping_bookings = booked_dates.filter(
-                check_in_date__lte=check_out_date,
-                check_out_date__gte=check_in_date
-            )
-
-            if overlapping_bookings.exists():
-                form.add_error(
-                    None, "Hotel already booked for the selected dates")
-                messages.warning(
-                    request, "Hotel already booked for the selected dates")
-            else:
-                # Check extras validations
-                breakfast_included = form.cleaned_data.get(
-                    'breakfast_included') or 0
-                kids_club_tickets = form.cleaned_data.get(
-                    'kids_club_tickets') or 0
-
-                if breakfast_included and (
-                    breakfast_included < 0 or
-                        breakfast_included > num_guests):
-                    form.add_error(
-                        'breakfast_included',
-                        "Breakfast included can't exceed the number of selected guests.")
-                    messages.warning(
-                        request,
-                        "Breakfast included can't exceed the number of selected guests.")
-
-                if kids_club_tickets and (kids_club_tickets < 0 or kids_club_tickets > 10):
-                    form.add_error(
-                        'kids_club_tickets',
-                        "Kids club tickets ranges from 0 to 10")
-                    messages.warning(
-                        request,
-                        "Kids club tickets ranges from 0 to 10")
-
-                    return booking  # Return the booking object
-
-    return form  # Return the form object with validation errors
 
 @login_required
 def delete_booking(request, booking_id):
