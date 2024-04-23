@@ -199,19 +199,96 @@ def edit_booking(request, booking_id):
         hotel=booking.hotel).exclude(id=booking_id)
 
     if request.method == 'POST':
-        form = BookingForm(request.POST, instance=booking)
+        form = BookingForm(request.POST, instance=booking, initial={
+            'breakfast_included': booking.breakfast_included,
+            'kids_club_tickets': booking.kids_club_tickets,
+        })
         if form.is_valid():
-            update_result = update_booking(
-                request, form, booking, booked_dates)
-            if isinstance(update_result, Booking):
-                # If update_booking returns a Booking object,
-                # the update was successful
-                messages.success(request, "Booking updated successfully.")
-                return redirect('booking_overview')
+            num_guests = form.cleaned_data['num_guests']
+            if num_guests <= 0:
+                form.add_error(
+                    'num_guests',
+                    "The number of guests must be greater than zero.")
+                messages.warning(
+                    request,
+                    "The number of guests must be greater than zero.")
+            elif num_guests > booking.cabin.max_guests:
+                form.add_error(
+                    'num_guests',
+                    "Exceeds maximum guests allowed.")
+                messages.warning(
+                    request,
+                    "Exceeds maximum guests allowed.")
             else:
-                # If update_booking returns a form with errors,
-                # render the form again with errors
-                form = update_result
+                check_in_date = form.cleaned_data['check_in_date']
+                check_out_date = form.cleaned_data['check_out_date']
+                today = timezone.now().date()
+                if check_in_date < today:
+                    form.add_error(
+                        'check_in_date',
+                        "Please select a future check-in date.")
+                    messages.warning(
+                        request,
+                        "Please select a future check-in date.")
+                elif check_out_date < check_in_date:
+                    form.add_error(
+                        'check_out_date',
+                        "Check-out date can't be earlier than check-in date.")
+                    messages.warning(
+                        request,
+                        "Check-out date can't be earlier than check-in date.")
+                    form.add_error(
+                        'check_out_date',
+                        "Check-out date can't be the same as check-in date.")
+                    messages.warning(
+                        request,
+                        "Check-out date can't be the same as check-in date.")
+                else:
+                    overlapping_bookings = booked_dates.filter(
+                        check_in_date__lte=check_out_date,
+                        check_out_date__gte=check_in_date
+                    )
+                    if overlapping_bookings.exists():
+                        form.add_error(
+                            None,
+                            "Hotel already booked for the selected dates")
+                        messages.warning(
+                            request,
+                            "Hotel already booked for the selected dates")
+                    else:
+                        breakfast_included = form.cleaned_data.get(
+                                                   'breakfast_included')
+                        kids_club_tickets = form.cleaned_data.get('kids_club_tickets')
+                        if breakfast_included and (
+                           breakfast_included <
+                           0 or breakfast_included > num_guests):
+                            form.add_error(
+                                'breakfast_included',
+                                "Invalid number of breakfast included."
+                            )
+                            messages.warning(
+                                request,
+                                "Invalid number of breakfast included."
+                            )
+
+                        if kids_club_tickets and (
+                           kids_club_tickets < 0 or kids_club_tickets > 10):
+                            form.add_error(
+                                'kids_club_tickets',
+                                "Number of kids club tickets can't be negative."
+                            )
+                            messages.warning(
+                                request,
+                                "Number of kids club tickets can't be negative."
+                            )
+
+                        if not form.errors:
+                            form.save()
+                            messages.success(
+                                request,
+                                "Booking updated successfully."
+                            )
+                            return redirect('booking_overview')
         else:
             for field, errors in form.errors.items():
                 for error in errors:
@@ -220,23 +297,17 @@ def edit_booking(request, booking_id):
                             request,
                             f"{form[field].label}: {error}")
     else:
-        form = BookingForm(instance=booking, initial={
-            'breakfast_included': booking.breakfast_included,
-            'kids_club_tickets': booking.kids_club_tickets,
-        })
-    
+        form = BookingForm(instance=booking)
     booked_dates = booked_dates.values_list('check_in_date', 'check_out_date')
-    booked_dates_str = [[str(check_in_date), 
-                        str(check_out_date)] for 
-                        check_in_date, check_out_date in booked_dates]
-
+    booked_dates_str = [[str(check_in_date),
+                        str(check_out_date)] for check_in_date,
+                        check_out_date in booked_dates]
     context = {
         'form': form,
         'booking': booking,
         'booked_dates': booked_dates,
         'booked_dates_json': json.dumps(booked_dates_str),
     }
-    
     return render(request, 'edit_booking.html', context)
 
 @login_required
