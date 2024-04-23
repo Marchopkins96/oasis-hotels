@@ -15,12 +15,11 @@ Hotel Booking
                     <h5 class="card-title">{{ hotel.name }}</h5>
                     <p class="card-text">{{ hotel.description }}</p>
                     <p class="card-text">Maximum Guests: {{hotel.max_guests}} </p>
-                    <p class="card-text">Price: £ {{hotel.price}} </p>
                     {% if hotel.extras.exists %}
                     <p class="card-text">Extras (optional):</p>
                     <ul>
                         {% for extra in hotel.extras.all %}
-                        <li>{{ extra.name }} Price: £ {{ extra.price }}</li>
+                        <li>{{ extra.name }}</li>
                         {% endfor %}
                     </ul>
                     {% endif %}
