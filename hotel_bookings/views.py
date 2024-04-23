@@ -194,7 +194,7 @@ def booking_success(request, hotel_id, booking_id):
     kids_club_tickets = booking.kids_club_tickets
 
     context = {
-        'hotel': Hotel,
+        'hotel': hotel,
         'booking': booking,
         'num_guests': num_guests,
         'check_in_date': check_in_date,
@@ -259,6 +259,7 @@ def edit_booking(request, booking_id):
                         request,
                         "Check-out date cannot be earlier than the check-in date."
                     )
+                elif check_in_date == check_out_date:
                     form.add_error(
                         'check_out_date',
                         "Check-out date cannot be the same as the check-in date."
