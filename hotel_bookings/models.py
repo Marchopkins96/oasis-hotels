@@ -49,3 +49,20 @@ class Booking(models.Model):
 
     def __str__(self):
         return f"Booking {self.id} - Hotel: {self.hotel.name}, User: {self.user.username}"  # noqa
+
+class Review(models.Model):
+    """
+    Stores a single comment entry related to a hotel
+    """
+    post = models.ForeignKey(
+        Hotel, on_delete=models.CASCADE, related_name="reviews")
+    author = models.ForeignKey(
+        User, on_delete=models.CASCADE, related_name="reviewer")
+    body = models.TextField()
+    created_on = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        ordering = ["created_on"]
+
+    def __str__(self):
+        return f"Review {self.body} by {self.author}"
