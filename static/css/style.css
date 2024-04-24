@@ -50,9 +50,19 @@ h1, h2 {
     margin-top: 1rem;
 }
 
+/* Intro cards */
+
 .card {
-    background-color: #fff;
+    background-color: #ffffff;
 }
+
+.card-body {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
 
 /* Carousel */
 
