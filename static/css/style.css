@@ -1,6 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap');
+
 /*General Styling*/
 body {
-    background-color: #aeecef;
+    background-color: #e8ae68;
+    font-family: 'Quicksand', serif;
     display: flex;
     flex-direction: column;
     min-height: 100vh;
@@ -18,7 +21,7 @@ h1, h2 {
 /*Nav Bar*/
 .navbar {
     padding-left: 2rem;
-    background-color: #27476e;
+    background-color: #db5a42;
 }
 
 .navbar-logo {
@@ -32,15 +35,15 @@ h1, h2 {
 }
 
 .nav-link:hover {
-    color: #aeecef;
+    color: #e3a587;
 }
 
 .navbar-toggler {
-    background-color: #aeecef;
+    background-color: #e3a587;
 }
 
 .dropdown-menu {
-    background-color: #aeecef;
+    background-color: #ffffff;
     ;
 }
 
@@ -48,6 +51,7 @@ h1, h2 {
 .custom-heading {
     color: #000;
     margin-top: 1rem;
+    margin-bottom: 1rem;
 }
 
 /* Intro cards */
@@ -115,7 +119,7 @@ h1, h2 {
 /* About section */
 
 .section-title {
-    color: #27476e;
+    color: #db5a42;
 }
 
 .about-section p,
@@ -125,7 +129,7 @@ h1, h2 {
 }
 
 .about-row {
-    border: 1px solid #27476e;
+    border: 1px solid #db5a42;
     border-radius: 5px;
     margin-bottom: 2rem;
     background-color: #ffffff;
@@ -133,31 +137,19 @@ h1, h2 {
 
 hr {
     height: 4px;
-    background-color: #27476e;
-}
-
-/* Contact */
-
-.social-links i {
-    color: #502038;
-    font-size: 2rem;
-    transition: opacity 0.3s ease;
-}
-
-.social-links i:hover {
-    opacity: 0.5;
+    background-color: #db5a42;
 }
 
 /* Footer */
 
 footer {
-    background-color: #27476e;
+    background-color: #db5a42;
     text-align: center;
     padding-top: 0.5rem;
 }
 
 footer i {
-    color: #aeecef;
+    color: #e8ae68;
     font-size: 2rem;
     transition: opacity 0.3s ease;
 }
