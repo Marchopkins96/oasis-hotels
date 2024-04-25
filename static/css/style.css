@@ -67,6 +67,9 @@ h1, h2 {
     justify-content: space-between;
 }
 
+.card-footer {
+    background-color: #db5a42;
+}
 
 /* Carousel */
 
