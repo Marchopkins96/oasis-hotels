@@ -52,7 +52,7 @@
                             <span><i class="fa-solid fa-circle-user"></i> {{ user.username }}</span>
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="{% url 'booking_overview' %}">My Booking</a>
+                            <a class="dropdown-item" href="{% url 'booking_overview' %}">My Bookings</a>
                             <a class="dropdown-item" href="{% url 'hotel_booking' %}">Make a Booking</a>
                             {% if user.is_superuser %}
                             <a class="dropdown-item" href="{% url 'admin:index' %}">Admin Panel</a>
