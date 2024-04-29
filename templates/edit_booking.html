@@ -62,7 +62,7 @@ Edit Booking
                             <label for="breakfast" class="col-sm-4 col-form-label">Breakfast Included</label>
                             <div class="col-sm-8">
                                 <!-- Set default value to 0 if breakfast_included is None -->
-                                <input type="number" class="form-control" id="breakfast" name="breakfast_included" min="1" max="{{ booking.hotel.max_guests }}"
+                                <input type="number" class="form-control" id="breakfast" name="breakfast_included" max="{{ booking.hotel.max_guests }}"
                                     value="{{ booking.breakfast_included|default_if_none:'0' }}">
                             </div>
                         </div>
@@ -71,7 +71,7 @@ Edit Booking
                             <div class="col-sm-8">
                                 <!-- Set default value to 0 if kids_club_tickets is None -->
                                 <input type="number" class="form-control" id="kids_club_tickets" 
-                                name="kids_club_tickets" min="1" max="10" value="{{ booking.kids_club_tickets|default_if_none:'0' }}">
+                                name="kids_club_tickets" max="10" value="{{ booking.kids_club_tickets|default_if_none:'0' }}">
                             </div>
                         </div>
                         <div class="form-group row">

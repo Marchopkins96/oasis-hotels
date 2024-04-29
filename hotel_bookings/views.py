@@ -119,6 +119,17 @@ def booking_create(request, hotel_id):
                                 request,
                                 "Breakfast included can't be negative."
                             )
+                        if breakfast_included and (
+                           breakfast_included <
+                           0 or breakfast_included > num_guests):
+                            form.add_error(
+                                'breakfast_included',
+                                "Breakfast included cannot be greater than amount of guests."
+                            )
+                            messages.warning(
+                                request,
+                                "Breakfast included cannot be greater than amount of guests."
+                            )
 
                         if kids_club_tickets and kids_club_tickets < 0:
                             form.add_error(
@@ -264,11 +275,11 @@ def edit_booking(request, booking_id):
                            0 or breakfast_included > num_guests):
                             form.add_error(
                                 'breakfast_included',
-                                "Invalid number of breakfast included."
+                                "Breakfast included cannot be greater than amount of guests."
                             )
                             messages.warning(
                                 request,
-                                "Invalid number of breakfast included."
+                                "Breakfast included cannot be greater than amount of guests."
                             )
 
                         if kids_club_tickets and (
