@@ -56,20 +56,20 @@ Hotel Booking
                         <div class="form-group row">
                             <label for="guests" class="col-sm-4 col-form-label">Number of Guests</label>
                             <div class="col-sm-8">
-                                <input type="number" class="form-control" id="guests" name="num_guests" required>
+                                <input type="number" class="form-control" id="guests" name="num_guests" max="{{ hotel.max_guests }}" required>
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="breakfast" class="col-sm-4 col-form-label">Breakfast Included</label>
                             <div class="col-sm-8">
                                 <input type="number" class="form-control" id="breakfast"
-                                    name="breakfast_included">
+                                    name="breakfast_included" max="{{ hotel.max_guests }}">
                             </div>
                         </div>
                         <div class="form-group row">
                             <label for="kids_club_tickets" class="col-sm-4 col-form-label">Kids Club Tickets</label>
                             <div class="col-sm-8">
-                                <input type="number" class="form-control" id="kids_club_tickets" name="kids_club_tickets">
+                                <input type="number" class="form-control" id="kids_club_tickets" name="kids_club_tickets" max="10">
                             </div>
                         </div>
                         <div class="form-group row">
