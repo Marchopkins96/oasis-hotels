@@ -17,10 +17,20 @@ def contact_view(request):
 
 
 def hotel_list(request):
+    """
+    This function retrieves all hotels from the database and renders
+    the 'index.html' template, passing the hotels as context.
+    """
     hotels = Hotel.objects.all()
     return render(request, 'index.html', {'hotels': hotels})
 
 def hotel_booking(request):
+    """
+    This function retrieves all hotles from the database with
+    prefetched extras, paginates the hotles to display 6 per page,
+    and renders the 'hotel_booking.html' template,
+    passing the paginated hotels as context.
+    """
     all_hotels = Hotel.objects.all().prefetch_related('extras')
     paginator = Paginator(all_hotels, 6)  # Display 6 cabins per page
     page_number = request.GET.get('page')
@@ -30,16 +40,24 @@ def hotel_booking(request):
 
 @login_required
 def booking_create(request, hotel_id):
+    """
+    This function handles the creation of a new booking for the
+    specified hotel. It performs form validation, checks for validation
+    errors, and handles various validation cases. If the booking is
+    successfully created, it redirects to the booking success page.
+    """
     hotel = Hotel.objects.get(id=hotel_id)
 
     if request.method == 'POST':
         form = BookingForm(request.POST)
         if form.is_valid():
+            # Process form data and perform validations
             booking = form.save(commit=False)
             booking.hotel = hotel
             booking.user = request.user
 
             num_guests = form.cleaned_data['num_guests']
+            # Check if the number of guests is greater than zero
             if num_guests <= 0:
                 form.add_error(
                     'num_guests',
@@ -50,6 +68,7 @@ def booking_create(request, hotel_id):
                     "The number of guests must be greater than zero."
                 )
             elif num_guests > booking.hotel.max_guests:
+                # Check if the number of guests exceeds the maximum allowed
                 form.add_error(
                     'num_guests',
                     "Exceeds maximum guests allowed."
@@ -64,6 +83,7 @@ def booking_create(request, hotel_id):
                 today = timezone.now().date()
 
                 if check_in_date < today:
+                    # Check if the check-in date is in the past
                     form.add_error(
                         'check_in_date',
                         "Please select a future check-in date."
@@ -73,6 +93,7 @@ def booking_create(request, hotel_id):
                         "Please select a future check-in date."
                     )
                 elif check_out_date < check_in_date:
+                    # Check if check-out date is earlier than the check-in date
                     form.add_error(
                         'check_out_date',
                         "Check-out date can't be earlier than check-in date."
@@ -82,6 +103,7 @@ def booking_create(request, hotel_id):
                         "Check-out date can't be earlier than check-in date."
                     )
                 elif check_in_date == check_out_date:
+                    # Check if check-in date and check-out date are the same
                     form.add_error(
                         'check_out_date',
                         "Check-out date can't be the same as check-in date."
@@ -91,6 +113,7 @@ def booking_create(request, hotel_id):
                         "Check-out date can't be the same as check-in date."
                     )
                 else:
+                    # Check if there are any overlapping bookings
                     existing_bookings = Booking.objects.filter(
                         hotel=hotel,
                         check_in_date__lte=check_out_date,
@@ -106,6 +129,7 @@ def booking_create(request, hotel_id):
                             "Hotel already booked for the selected dates"
                         )
                     else:
+                        # Check additional validations
                         breakfast_included = form.cleaned_data.get(
                                                    'breakfast_included')
                         kids_club_tickets = form.cleaned_data.get('kids_club_tickets')
@@ -153,6 +177,7 @@ def booking_create(request, hotel_id):
                                 booking_id=booking.id
                             )
         else:
+            # Handle form validation errors
             for field, errors in form.errors.items():
                 for error in errors:
                     if field != '__all__':
@@ -162,6 +187,7 @@ def booking_create(request, hotel_id):
                         )
     else:
         form = BookingForm()
+    # Get booked dates for the hotel
     booked_dates = Booking.objects.filter(hotel=hotel).values_list(
         'check_in_date',
         'check_out_date'
@@ -179,6 +205,12 @@ def booking_create(request, hotel_id):
 
 @login_required
 def booking_success(request, hotel_id, booking_id):
+    """
+    This function retrieves the hotel and booking objects associated
+    with the provided IDs. It gathers the necessary information from
+    the booking object. Finally, it renders the 'booking_success.html'
+    template, passing the relevant context.
+    """
     cabin = get_object_or_404(Hotel, id=hotel_id)
     booking = get_object_or_404(Booking, id=booking_id)
     num_guests = booking.num_guests
@@ -200,11 +232,22 @@ def booking_success(request, hotel_id, booking_id):
 
 @login_required
 def booking_overview(request):
+    """
+    This function retrieves all bookings associated with the currently
+    logged-in user. It renders the 'booking_overview.html' template,
+    passing the bookings as context.
+    """
     bookings = Booking.objects.filter(user=request.user)
     return render(request, 'booking_overview.html', {'bookings': bookings})
 
 @login_required
 def edit_booking(request, booking_id):
+    """
+    This function handles the editing of an existing booking identified
+    by the provided booking_id. It performs form validation, checks for
+    validation errors, and handles various validation cases. If the
+    booking is successfully updated, it redirects to the booking overview page.
+    """
     booking = get_object_or_404(Booking, id=booking_id, user=request.user)
     booked_dates = Booking.objects.filter(
         hotel=booking.hotel).exclude(id=booking_id)
@@ -215,8 +258,10 @@ def edit_booking(request, booking_id):
             'kids_club_tickets': booking.kids_club_tickets,
         })
         if form.is_valid():
+            # Process form data and perform validations
             num_guests = form.cleaned_data['num_guests']
             if num_guests <= 0:
+                # Check if the number of guests is greater than zero
                 form.add_error(
                     'num_guests',
                     "The number of guests must be greater than zero.")
@@ -224,6 +269,7 @@ def edit_booking(request, booking_id):
                     request,
                     "The number of guests must be greater than zero.")
             elif num_guests > booking.hotel.max_guests:
+                # Check if the number of guests exceeds the maximum allowed
                 form.add_error(
                     'num_guests',
                     "Exceeds maximum guests allowed.")
@@ -235,6 +281,7 @@ def edit_booking(request, booking_id):
                 check_out_date = form.cleaned_data['check_out_date']
                 today = timezone.now().date()
                 if check_in_date < today:
+                    # Check if the check-in date is in the past
                     form.add_error(
                         'check_in_date',
                         "Please select a future check-in date.")
@@ -242,12 +289,15 @@ def edit_booking(request, booking_id):
                         request,
                         "Please select a future check-in date.")
                 elif check_out_date < check_in_date:
+                    # Check if check-out date is earlier than the check-in date
                     form.add_error(
                         'check_out_date',
                         "Check-out date can't be earlier than check-in date.")
                     messages.warning(
                         request,
                         "Check-out date can't be earlier than check-in date.")
+                elif check_in_date == check_out_date:
+                    # Check if check-in date and check-out date are the same
                     form.add_error(
                         'check_out_date',
                         "Check-out date can't be the same as check-in date.")
@@ -255,6 +305,7 @@ def edit_booking(request, booking_id):
                         request,
                         "Check-out date can't be the same as check-in date.")
                 else:
+                    # Check if there are any overlapping bookings
                     overlapping_bookings = booked_dates.filter(
                         check_in_date__lte=check_out_date,
                         check_out_date__gte=check_in_date
@@ -267,6 +318,7 @@ def edit_booking(request, booking_id):
                             request,
                             "Hotel already booked for the selected dates")
                     else:
+                        # Check additional validations
                         breakfast_included = form.cleaned_data.get(
                                                    'breakfast_included')
                         kids_club_tickets = form.cleaned_data.get('kids_club_tickets')
@@ -301,6 +353,7 @@ def edit_booking(request, booking_id):
                             )
                             return redirect('booking_overview')
         else:
+            # Handle form validation errors
             for field, errors in form.errors.items():
                 for error in errors:
                     if field != '__all__':
@@ -323,9 +376,18 @@ def edit_booking(request, booking_id):
 
 @login_required
 def delete_booking(request, booking_id):
+    """
+    This function handles the deletion of a booking identified by the
+    provided booking_id. It retrieves the booking object associated with
+    the provided ID and performs the deletion when a POST request is received.
+    After successful deletion, it displays a success message and redirects
+    the user to the booking overview page. Otherwise, it renders the
+    'delete_booking.html' template, passing the booking object as context.
+    """
     booking = get_object_or_404(Booking, id=booking_id, user=request.user)
 
     if request.method == 'POST':
+        # Perform booking deletion
         booking.delete()
         messages.success(request, "Booking deleted successfully.")
         return redirect('booking_overview')
