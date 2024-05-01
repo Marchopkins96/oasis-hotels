@@ -228,7 +228,7 @@ The 'Quicksand' font is the primary font used with 'Serif' provided as a back up
 
 Entity Relationship Diagram (ERD)
 
-![DataScheme](documentation/readme_images/ERD-diagram.png)
+![DataScheme](documentation/readme_images/erd-diagram.png)
 
 * The Extras entity represents extras that can be associated with hotels, with fields id as the primary key, name for the extras's name
 * The Hotel entity represents individual hotel listings, with fields id as the primary key, name for the hotel's name, description for the hotel's description, image for the hotel's image and max_guests for the maximum number of guests allowed
@@ -263,3 +263,91 @@ This data scheme allows for the management of users, extras, hotels, and booking
 
 * 404 Error Page, provides user with a button the redirect to home page
 * 500 Error Page, provides user with a button the redirect to home page
+
+## Features
+
+* Home page showcases a rotating carousel that contains the hotels available
+* The Home page features a reasons section stating why to choose Oasis Hotels with an about section at the bottom of the page
+* User can make an account and login
+* When logged in, users get access to the hotel overview and are able to book hotels
+* Users can edit and delete their bookings
+* Every user action is accompanied by a corresponding message to ensure that users are promptly notified of any changes or updates
+
+### Existing Features
+
+* Home Page
+    * Displays a navigation bar with logo, main heading, reasons section, carousel of hotels available, about section, footer with social links
+
+![Home Page](documentation/readme_images/home-page.png)
+
+* Once a user is logged in the Sign Up button changes to Book Now button
+
+* Logo
+    * Logo was created using [Craiyon](https://www.craiyon.com/) AI image generator, palm trees and sun being the key words
+
+![Logo](documentation/readme_images/logo.png)
+
+* Navigation Bar
+    * It differs depending on if its a user, admin or just a visitor visiting the site
+
+    * Navigation bar for a visitor
+
+    ![Visitor](documentation/readme_images/visitor-nav.png)
+
+    * Navigation bar for a user
+    ![User](documentation/readme_images/user-nav.png)
+    * Drop down menu allows users to make a booking and view existing bookings
+
+    * Navigation bar for admin
+    ![Admin](documentation/readme_images/admin-nav.png)
+    * Admin bar accessible via dropdown option
+
+* Reasons section
+    * Section with a few reasons on why a user should use Oasis Hotels
+
+    ![Reasons](documentation/readme_images/reasons.png)
+
+* Hotel Carousel
+    * When on home page there is a carousel that displays all available hotels for booking, it also has controls to move left or right, name and description of the hotel, when its clicked it redirects users to hotel overview page and visitors are asked to create an account or login in order to view the hotels in more detail.
+
+![Hotel Carousel](documentation/readme_images/carousel.jpeg)
+
+* About Section
+    * It contains a description about Oasis Hotels
+
+![About](documentation/readme_images/about-us.png)
+
+* Footer
+    * Contains copyright information, creator and social links
+
+![Footer](documentation/readme_images/footer.png)
+
+* Contact Page
+    * For educational purposes, the website includes fictional contact information such as an address, phone number, and email.
+
+![Contact](documentation/readme_images/contact-page.png)
+
+* Sign up
+    * User can create an account
+
+![Sign Up](documentation/readme_images/user-signup.png)
+
+* Login
+    * User can login into an account, if they have created one
+
+![Login](documentation/readme_images/user-signin.png)
+![Login Message](documentation/readme_images/signin-succesful.png)
+
+* Browse Available Hotels
+    * Admin can create hotels through django admin panel
+    * Hotels are paginated to display 6 hotels per page
+
+![Browse Hotels](documentation/readme_images/available-hotels.jpeg)
+
+* Hotel pagination
+    * On the bottom of the page
+
+![Pagination](documentation/readme_images/pagination.png)
+
+    
+
