@@ -338,6 +338,11 @@ This data scheme allows for the management of users, extras, hotels, and booking
 ![Login](documentation/readme_images/user-signin.png)
 ![Login Message](documentation/readme_images/signin-succesful.png)
 
+* Logout
+    * User can logout
+
+![Logout](documentation/readme_images/user-signout.png)
+
 * Browse Available Hotels
     * Admin can create hotels through django admin panel
     * Hotels are paginated to display 6 hotels per page
@@ -348,6 +353,74 @@ This data scheme allows for the management of users, extras, hotels, and booking
     * On the bottom of the page
 
 ![Pagination](documentation/readme_images/pagination.png)
+
+* Make a Booking
+    * Users can make a booking by clicking the hotel they want and then read details and fill in the booking form
+    * Form validation is implemented to make sure form are submitted correctly and if there is an error user will be notified with alert message, also if everything is okay, user gets a message to notifiy them of that
+    * Form contains extras which are completely optional and they dont have to be selected by the user
+
+    ![Message](documentation/readme_images/booking-succesful-banner.png)
+
+![Make a Booking](documentation/readme_images/make-a-booking.png)
+
+* Booking Succesful
+    * If booking is succesfull, user gets a notified message and an overview of the booking they just made, which includes all the details and also there is a button for the contact page and my bookings that takes the user to a list of all user bookings
+
+![Booking Succesful](documentation/readme_images/Booking-succesful.png)
+
+* Booking Overview
+    * Includes all of the user bookings, which have buttons to edit or delete bookings.
+
+![Booking Overview](documentation/readme_images/booking-overview.jpeg)
+
+* Already booked dates
+    * User won't be able to book dates that are already booked.
+    * Dates in the past are unavailable.
+    * Booked dates blanked out on the calendar
+
+![Booked Dates](documentation/readme_images/already-booked-dates.png)
+
+* Edit Booking
+    * User can edit their booking and save changes
+
+![Edit Booking](documentation/readme_images/edit-booking.png)
+
+* Delete Booking
+    * User can delete their booking, before it is deleted it has to be confirmed.
+
+![Delete Booking](documentation/readme_images/confirm-delete.png)
+
+* Alert messages
+    * For every action by a user there is an alert message to notify them
+    * Here is an example 
+
+![Alert Message](documentation/readme_images/alert-message.png)
+
+* Error Pages
+    * There are custom 404 and 500 error pages
+    * They contain buttons to redirect to home page if an error is encountered
+
+![Error 404](documentation/readme_images/404.png)
+![Error 500](documentation/readme_images/500.png)
+
+* Admin Features
+    * Django built in admin panel allows admin control over the website.
+    * Admin can access admin panel through the navigation bar
+    * Can add, update, delete hotels.
+    * Create extras, update existing extras which are connected to the hotels on the website.
+    * Delete accounts, verifiy emails, delete bookings
+
+### Features To Implement In Future
+
+* User Reviews: Allow users to leave reviews and ratings for hotels they have booked, providing valuable feedback for other users
+* Add a pricing scale to hotels and extras
+* Advanced Search: Implement an advanced search functionality, enabling users to search for hotels based on specific criteria such as price range and availability
+* Add an online payment option to allow for easy payment to coinside with the ease of booking
+
+
+
+
+
 
     
 
