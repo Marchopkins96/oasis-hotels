@@ -66,6 +66,31 @@ Agile was used to help prioritize and organise the tasks that related to the cre
 
 For a more detailed look at user stories please see [project board](https://github.com/users/Marchopkins96/projects/6)
 
+### Target Audience
+
+* Couples & families planning their next getaway in the sun
+* People who like to book things quickly and easily
+* Mobile users who enjoy conveniently booking from their device
+* People who enjoy a visually appealing experience
+
+### First time user
+
+* Users are greeted with a simple and intuitive navigation bar making it easy to explore the website
+* Users are drawn in by eye catching color and design 
+* content dispaying an overview of the company and what it has to offer a user
+* Forms are easy to naviagate with clear validation messages to ensure accurate information in inputted
+* quick and easy registration process
+
+### Registered User
+
+* Login process is quick and easy to navigate
+* username displayed once logged in
+* Browse available hotels
+* Booking of hotels
+* Ability to view booking history and any upcoming reservations
+* Easily delete or modify bookings
+
+
 
 
 
