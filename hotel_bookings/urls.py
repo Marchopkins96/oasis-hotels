@@ -10,7 +10,7 @@ urlpatterns = [
     path('', views.hotel_list, name='home'),
     path('contact/', views.contact_view, name='contact'),
 
-    # Create, Read, Update and Delete Cabin Bookings
+    # Create, Read, Update and Delete Hotel Bookings
     path('hotel-booking/', views.hotel_booking, name='hotel_booking'),
     path('booking/<int:hotel_id>/', views.booking_create, name='my_booking'),
     path('booking/success/<int:hotel_id>/<int:booking_id>/', views.booking_success, name='booking_success'),

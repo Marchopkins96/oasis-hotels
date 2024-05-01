@@ -32,7 +32,7 @@ def hotel_booking(request):
     passing the paginated hotels as context.
     """
     all_hotels = Hotel.objects.all().prefetch_related('extras')
-    paginator = Paginator(all_hotels, 6)  # Display 6 cabins per page
+    paginator = Paginator(all_hotels, 6)  # Display 6 hotels per page
     page_number = request.GET.get('page')
     hotels = paginator.get_page(page_number)
 
@@ -134,7 +134,7 @@ def booking_create(request, hotel_id):
                                                    'breakfast_included')
                         kids_club_tickets = form.cleaned_data.get('kids_club_tickets')
 
-                        if breakfast_included and breakfast_included < 0:  # noqa
+                        if breakfast_included and breakfast_included < 0:
                             form.add_error(
                                 'breakfast_included',
                                 "Breakfast included can't be negative."
