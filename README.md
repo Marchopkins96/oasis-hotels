@@ -41,4 +41,31 @@ Agile was used to help prioritize and organise the tasks that related to the cre
 ![User Stories, Issues](documentation/readme_images/project-board.png)
 </details>
 
+### User Stories
+
+1. Initial Deployment 
+* Create a new Heroku application
+* Link GitHub repository to the new Heroku app
+2. Home Page
+* Create a navigation bar
+* Create a footer
+3. User Registration
+* Sign up page
+* User registration, log in, log out functions
+* Username displays on screen
+4. Website Admin and Bookings
+* Alert messages
+* CRUD functionality
+* Hotel pagination
+* Admin panel
+* Double bookings
+* Book extras
+4. Maintain consistent design with responsiveness in mind
+* Maintain consistent design throughout the website
+* Test responsiveness
+
+For a more detailed look at user stories please see [project board](https://github.com/users/Marchopkins96/projects/6)
+
+
+
 
