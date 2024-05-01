@@ -196,3 +196,40 @@ The 'Quicksand' font is the primary font used with 'Serif' provided as a back up
 
 ![User Sign Up Page](documentation/wireframes/wf-user-signup-page.png)
 </details>
+
+### Data Models
+
+1. AllAuth User Model
+    * Django Allauth, the User model is the default user model provided by the Django authentication system
+    * The User entity has a one-to-many relationship with the Booking entity. This means that a User can have multiple Bookings, but each Booking is associated with only one User.
+---
+2. Extras Model
+    * Data model created so admin can add extras to the hotel booking, and control the names of extras
+    * Only Admin can change the data in the backend.
+    * User can book those extras through the Booking Model
+    * An extra can be associated with multiple Hotels, and a Hotel can have multiple extras. This is represented by the many-to-many relationship between Extras and Hotel.
+    * There are two extras set up, which are breakfast included and kids club tickets
+---
+3. Hotel Model
+    * A Hotel can have multiple Bookings, but each Booking is associated with only one Hotel. This is represented by the foreign key relationship between Hotel and Booking.
+    * Admin can add Hotels through djangos admin panel.
+    * Only Admin can change the data in the backend.
+    * User can see the hotel information and image based on the chosen hotel.
+    * Information provided is image, description, maximum guests, extras
+---
+4. Booking Model
+    * A User can have multiple Bookings, but each Booking is associated with only one User. This is represented by the foreign key relationship between User and Booking.
+    * Booking model has a feature that prevents overlapping bookings, so users dont book on the same dates
+    * Full CRUD functionality is available to the user.
+    * User in order to book has to fill check-in, check-out dates, number of guests and optional extras
+    ---
+
+### Database Scheme
+
+Entity Relationship Diagram (ERD)
+
+![DataScheme](documentation/readme_images/ERD-diagram.png)
+
+* The Extras entity represents extras that can be associated with hotels, with fields id as the primary key, name for the extras's name
+* The Hotel entity represents individual hotel listings, with fields id as the primary key, name for the hotel's name, description for the hotel's description, image for the hotel's image and max_guests for the maximum number of guests allowed
+* The Booking entity represents a booking made by a user for a specific hotel, with fields id as the primary key, hotel_id as a foreign key referencing the Hotel entity, user_id as a foreign key referencing the User entity, check_in_date for the booking's check-in date, check_out_date for the booking's check-out date, num_guests for the number of guests in the booking, breakfast_included for the optional quantity of breakfast's included, kids_club_tickets for the optional quantity of kids club tickets within the booking.
