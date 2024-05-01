@@ -90,7 +90,109 @@ For a more detailed look at user stories please see [project board](https://gith
 * Ability to view booking history and any upcoming reservations
 * Easily delete or modify bookings
 
+### Admin user
 
+* Secure login portal for admin users who have the rights to access it
+* Access to the admin dashboard to manage hotels, extras and bookings
+* Ability to add, edit and delete hotel listings
+* Ability to add, edit and delete extras options
+* Delete user accounts, providing the necessary control for managing user data
+* Management of bookings, abiliity to view, delete or modify bookings
 
+## Design
 
+The Oasis Hotels website is invitiing and visually pleasing. Boasting a warm color pallette to give the feeling of a warm summers evening. The navigation bar features a company logo with clear easy to read textual content. Hotel photos are displayed in a bordered carousel to aid the user experience. The about section is placed on a white background the contrast the background of the home page nicely. Social links are featured in the footer section.
 
+### Color Scheme
+![Color Scheme](documentation/readme_images/colorscheme.png)
+
+### Hotel Images 
+
+All the hotel images were created using Artificial Inteligence, AI image generator [Craiyon](https://www.craiyon.com/)
+
+### Logo 
+
+The Logo was also created at [Craiyon](https://www.craiyon.com/)
+
+### Typography 
+
+The 'Quicksand' font is the primary font used with 'Serif' provided as a back up
+
+### Wireframes 
+
+<details>
+<summary> Home Page
+</summary>
+
+![Home Page](documentation/wireframes/wf-homepage.png)
+</details>
+
+<details>
+<summary> Home Page when logged in
+</summary>
+
+![Home Page when logged in](documentation/wireframes/wf-homepage-logged-in.png)
+</details>
+
+<details>
+<summary> Contact Page
+</summary>
+
+![Contact Page](documentation/wireframes/wf-contact-page.png)
+</details>
+
+<details>
+<summary> Hotel Booking Page
+</summary>
+
+![Hotel Booking Page](documentation/wireframes/wf-hotel-booking-page.png)
+</details>
+
+<details>
+<summary> Make a Booking Page
+</summary>
+
+![Make a Booking Page](documentation/wireframes/wf-make-a-booking.png)
+</details>
+
+<details>
+<summary> My Booking Page
+</summary>
+
+![My Booking Page](documentation/wireframes/wf-my-booking-page.png)
+</details>
+
+<details>
+<summary> Edit Booking Page
+</summary>
+
+![Edit Booking Page](documentation/wireframes/wf-edit-booking-page.png)
+</details>
+
+<details>
+<summary> Delete Booking Page
+</summary>
+
+![Delete Booking Page](documentation/wireframes/wf-delete-booking-page.png)
+</details>
+
+<details>
+<summary> User Login Page
+</summary>
+
+![User Login Page](documentation/wireframes/wf-user-login-page.png)
+</details>
+
+<details>
+<summary> User Logout Page
+</summary>
+
+![User Logout Page](documentation/wireframes/wf-user-logout-page.png)
+</details>
+
+<details>
+<summary> User Sign Up Page
+</summary>
+
+![User Sign Up Page](documentation/wireframes/wf-user-signup-page.png)
+</details>
