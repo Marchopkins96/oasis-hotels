@@ -417,9 +417,43 @@ This data scheme allows for the management of users, extras, hotels, and booking
 * Advanced Search: Implement an advanced search functionality, enabling users to search for hotels based on specific criteria such as price range and availability
 * Add an online payment option to allow for easy payment to coinside with the ease of booking
 
+## Technologies Used
 
+### Languages Used
 
+* [HTML5](https://en.wikipedia.org/wiki/HTML5)
+* [CSS3](https://en.wikipedia.org/wiki/CSS)
+* [JavaScript](https://en.wikipedia.org/wiki/JavaScript)
+* [Python](https://en.wikipedia.org/wiki/Python_(programming_language))
 
+### Databases Used
+
+* [ElephantSQL](https://www.elephantsql.com/) - Postgres database
+* [Cloudinary](https://cloudinary.com/) - Online static file storage
+
+### Frameworks Used
+
+* [Django](https://www.djangoproject.com/) - Python framework
+* [Bootstrap 4.6.1](https://getbootstrap.com/docs/4.6/getting-started/introduction/) - CSS framework
+
+### Programs Used
+
+* [Github](https://github.com/) - Storing the code online
+* [Gitpod](https://www.gitpod.io/) - To write the code.
+* [Heroku](https://www.heroku.com/) - Used as the cloud-based platform to deploy the site.
+* [Google Fonts](https://fonts.google.com/) - Import main font the website.
+* [Balsamiq](https://balsamiq.com/wireframes/) - Used to create wireframes
+* [Lucid Chart](https://lucidchart.com/) - Used to create ERD diagram
+* [Craiyon](https://www.craiyon.com/) - Generate AI images of hotels and logo
+* [Am I Responsive](https://ui.dev/amiresponsive) - To show the website image on a range of devices.
+* [Git](https://git-scm.com/) - Version control
+* [Jinja](https://jinja.palletsprojects.com/en/3.1.x/) - Templating engine
+* [Favicon Generator](https://realfavicongenerator.net/) - Used to create a favicon
+* [JSHint](https://jshint.com/) - Used to validate JavaScript
+* [W3C Markup Validation Service](https://validator.w3.org/) - Used to validate HTML
+* [CSS Validation Service](https://jigsaw.w3.org/css-validator/) - Used to validate CSS
+* [CI Python Linter](https://pep8ci.herokuapp.com/#) - Used to validate Python
+* [Coolers](https://coolors.co/) - Color Scheme
 
 
     
