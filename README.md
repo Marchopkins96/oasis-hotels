@@ -549,3 +549,13 @@ Please see  [TESTING.md](TESTING.md) for all the detailed testing performed.
 * [Cloudinary](https://cloudinary.com/documentation/diagnosing_error_codes_tutorial)
 * [Google](https://www.google.com/)
 * [W3 Schools](https://www.w3schools.com/)
+
+### Code & Content 
+
+* Code from [Woodland Whispers Retreat](https://github.com/Thomas-Tomo/woodland-whispers-retreat) was used and adapted in the making of this project
+* All images were generated with Artificial intelligence (AI) using unique keywords
+
+### Acknowledgements
+
+* I would like to thank my mentor for the support and feedback throughout this project, Mitko Bachvarov.
+* I would also like to thank my fellow students of the slack community who will also look to help where possible and share knowledge
