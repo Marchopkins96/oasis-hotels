@@ -7,6 +7,7 @@ from django.utils import timezone
 
 # Create your models here.
 
+
 class Extras(models.Model):
     """
     Add a new Extra as Admin in admin panel
@@ -15,6 +16,7 @@ class Extras(models.Model):
 
     def __str__(self):
         return self.name
+
 
 class Hotel(models.Model):
     """
@@ -30,13 +32,15 @@ class Hotel(models.Model):
     def __str__(self):
         return self.name
 
+
 class Booking(models.Model):
     """
     Hotel Booking
     This class handles the information related to a booking made by a user
     for a specific hotel. It stores details such as the booked hotel,
     the user who made the booking, check-in and check-out dates,
-    the number of guests, optional quantities of breakfasts and kids club tickets
+    the number of guests,
+    optional quantities of breakfasts and kids club tickets
 
     """
     hotel = models.ForeignKey(Hotel, on_delete=models.CASCADE)

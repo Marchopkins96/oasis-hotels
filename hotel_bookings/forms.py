@@ -12,9 +12,11 @@ class BookingForm(forms.ModelForm):
     """
     num_guests = forms.IntegerField(validators=[MinValueValidator(1)])
     # Optional field for breakfast included
-    breakfast_included = forms.IntegerField(validators=[MinValueValidator(0)], required=False)
+    breakfast_included = forms.IntegerField(
+        validators=[MinValueValidator(0)], required=False)
     # Optional field for kids club tickets
-    kids_club_tickets = forms.IntegerField(validators=[MinValueValidator(0)], required=False)
+    kids_club_tickets = forms.IntegerField(
+        validators=[MinValueValidator(0)], required=False)
 
     class Meta:
         model = Booking

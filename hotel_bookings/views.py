@@ -24,6 +24,7 @@ def hotel_list(request):
     hotels = Hotel.objects.all()
     return render(request, 'index.html', {'hotels': hotels})
 
+
 def hotel_booking(request):
     """
     This function retrieves all hotles from the database with
@@ -37,6 +38,7 @@ def hotel_booking(request):
     hotels = paginator.get_page(page_number)
 
     return render(request, 'hotel_booking.html', {'hotels': hotels})
+
 
 @login_required
 def booking_create(request, hotel_id):
@@ -148,21 +150,21 @@ def booking_create(request, hotel_id):
                            0 or breakfast_included > num_guests):
                             form.add_error(
                                 'breakfast_included',
-                                "Breakfast included cannot be greater than amount of guests."
+                                "Breakfast cannot be higher than guest amount."
                             )
                             messages.warning(
                                 request,
-                                "Breakfast included cannot be greater than amount of guests."
+                                "Breakfast cannot be higher than guest amount."
                             )
 
                         if kids_club_tickets and kids_club_tickets < 0:
                             form.add_error(
                                 'kids_club_tickets',
-                                "Number of kids club tickets can't be negative."
+                                "Invalid number of kids club tickets."
                             )
                             messages.warning(
                                 request,
-                                "Number of kids club tickets can't be negative."
+                                "Invalid number of kids club tickets."
                             )
 
                         if not form.errors:
@@ -204,6 +206,7 @@ def booking_create(request, hotel_id):
     }
     return render(request, 'my_booking.html', context)
 
+
 @login_required
 def booking_success(request, hotel_id, booking_id):
     """
@@ -231,6 +234,7 @@ def booking_success(request, hotel_id, booking_id):
     }
     return render(request, 'booking_success.html', context)
 
+
 @login_required
 def booking_overview(request):
     """
@@ -240,6 +244,7 @@ def booking_overview(request):
     """
     bookings = Booking.objects.filter(user=request.user)
     return render(request, 'booking_overview.html', {'bookings': bookings})
+
 
 @login_required
 def edit_booking(request, booking_id):
@@ -328,22 +333,22 @@ def edit_booking(request, booking_id):
                            0 or breakfast_included > num_guests):
                             form.add_error(
                                 'breakfast_included',
-                                "Breakfast included cannot be greater than amount of guests."
+                                "Breakfast cannot be higher than guest amount."
                             )
                             messages.warning(
                                 request,
-                                "Breakfast included cannot be greater than amount of guests."
+                                "Breakfast cannot be higher than guest amount."
                             )
 
                         if kids_club_tickets and (
                            kids_club_tickets < 0 or kids_club_tickets > 10):
                             form.add_error(
                                 'kids_club_tickets',
-                                "Number of kids club tickets can't be negative."
+                                "Invalid number of kids club tickets."
                             )
                             messages.warning(
                                 request,
-                                "Number of kids club tickets can't be negative."
+                                "Invalid number of kids club tickets."
                             )
 
                         if not form.errors:
@@ -374,6 +379,7 @@ def edit_booking(request, booking_id):
         'booked_dates_json': json.dumps(booked_dates_str),
     }
     return render(request, 'edit_booking.html', context)
+
 
 @login_required
 def delete_booking(request, booking_id):
