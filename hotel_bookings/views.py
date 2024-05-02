@@ -166,6 +166,7 @@ def booking_create(request, hotel_id):
                             )
 
                         if not form.errors:
+                            print('booking: ', booking)
                             booking.save()
                             messages.success(
                                 request,
