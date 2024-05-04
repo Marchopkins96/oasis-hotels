@@ -7,9 +7,49 @@ Our Django based website is a platform for users to explore and book a wide rang
 
 [View Oasis Hotels live website here](https://oasis-hotels-a4728551ae39.herokuapp.com/)
 
+## Table of Contents
+### [User Experience](#user-experience)
+* [Project Goals](#project-goals)
+* [Agile Methodology](#agile-methodology)
+* [User Stories](#user-stories)
+* [Target Audience](#target-audience)
+* [First Time User](#first-time-user)
+* [Registered User](#registered-user)
+* [Admin User](#admin-user)
+### [Design](#design-1)
+* [Color Scheme](#color-scheme)
+* [Hotel Images](#hotel-images)
+* [Wireframes](#wireframes)
+* [Data Model](#data-models)
+* [Database Scheme](#database-scheme)
+### [Security Features](#security-features-1)
+### [Features](#features-1)
+* [Existing Features](#existing-features)
+* [Features to Implement in Future](#features-to-implement-in-future)
+### [Technologies Used](#technologies-used-1)
+* [Languages Used](#languages-used)
+* [Databases Used](#databases-used)
+* [Frameworks Used](#frameworks-used)
+* [Programs Used](#programs-used)
+### [Deployment and Local Deployment](#deployment-and-local-developement)
+* [Local Development](#local-developement)
+* [ElephantSQL Database](#elephantsql-database)
+* [Cloudinary](#cloudinary)
+* [Heroku Deployment](#heroku-deployment)
+### [Testing](#testing-1)
+### [References](#references-1)
+* [Docs](#docs)
+* [Content](#content)
+* [Acknowledgements](#acknowledgements)
+
+
 ## User Experience
 
 Our website offers the user intuitive navigation, eye catching visuals, and a quick and easy booking process. Oasis Hotels website can be accessed on a range of devices making it easy to make a booking on the device of your choice. Discover your next holiday destination with Oasis Hotels here to make that proccess as enjoyable and stress free as possible.
+
+### Project Goals
+
+The goal of the Oasis Hotels project is to create a user-friendly online platform that allows visitors to browse, and book available hotels at their own leisure. The project aims to provide a stress free user experience, making navigation around the site as easy as possible to enhance the positive feeling for visitors to the site.
 
 ### Agile Methodology
 
