@@ -146,3 +146,34 @@ The site functions as expected on all of the above browsers. I have tested the s
 ![500 Error Page](documentation/validation/html-500-validation.png)
 </details> 
 
+### CSS Validation
+
+<details>
+<summary> Custom CSS (style.css)
+</summary>
+
+![Custom CSS (style.css)](documentation/validation/css-validation.png)
+</details>
+
+### JavaScript Validation
+
+<details>
+<summary> Custom JS (script.js)
+</summary>
+
+![Custom JS (script.js)](documentation/validation/custom-js-validation.png)
+</details>
+
+<details>
+<summary> Edit Booking Inline Script
+</summary>
+
+![Edit Booking Inline Script](documentation/validation/edit-booking-js-validation.png)
+</details>
+
+<details>
+<summary> Make a Booking Inline Script
+</summary>
+
+![Make a Booking Inline Script](documentation/validation/make-booking-js-validation.png)
+</details>
