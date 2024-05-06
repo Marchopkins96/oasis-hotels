@@ -51,3 +51,98 @@ The site has been tested on the following browsers & devices:
 
 The site functions as expected on all of the above browsers. I have tested the site on all browsers ans devices at my disposal to ensure the site is functional on different devices and platforms.
 
+## Code Validation 
+
+### HTML Validation
+
+<details>
+<summary> Home Page
+</summary>
+
+![Home Page](documentation/validation/html-validation-homepage.png)
+</details>
+
+<details>
+<summary> Contact Page
+</summary>
+
+![Contact Page](documentation/validation/html-validation-contact.png)
+</details>
+
+<details>
+<summary> Sign Up Page
+</summary>
+
+![Sign Up Page](documentation/validation/html-signup-validation.png)
+</details>
+
+<details>
+<summary> Login Page
+</summary>
+
+![Login Page](documentation/validation/html-login-validation.png)
+</details>
+
+<details>
+<summary> Logout Page
+</summary>
+
+![Logout Page](documentation/validation/html-logout-validation.png)
+</details>
+
+<details>
+<summary> Browse Hotels Page
+</summary>
+
+![Browse Hotels Page](documentation/validation/html-hotel-booking-validation.png)
+</details>
+
+<details>
+<summary> Make a Booking Page
+</summary>
+
+![Make a Booking Page](documentation/validation/html-make-a-booking-validation.png)
+</details>
+
+<details>
+<summary> Booking Success Page
+</summary>
+
+![Booking Success Page](documentation/validation/html-booking-success-validation.png)
+</details>
+
+<details>
+<summary> Booking Overview Page
+</summary>
+
+![Booking Overview Page](documentation/validation/html-booking-overview-validation.png)
+</details>
+
+<details>
+<summary> Edit Booking Page
+</summary>
+
+![Edit Booking Page](documentation/validation/html-edit-booking-validation.png)
+</details>
+
+<details>
+<summary> Delete Booking Page
+</summary>
+
+![Delete Booking Page](documentation/validation/html-delete-booking-validation.png)
+</details>
+
+<details>
+<summary> 404 Error Page
+</summary>
+
+![404 Error Page](documentation/validation/html-404-validation.png)
+</details>
+
+<details>
+<summary> 500 Error Page
+</summary>
+
+![500 Error Page](documentation/validation/html-500-validation.png)
+</details> 
+
