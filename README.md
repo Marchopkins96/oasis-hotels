@@ -8,7 +8,7 @@ Our Django based website is a platform for users to explore and book a wide rang
 [View Oasis Hotels live website here](https://oasis-hotels-a4728551ae39.herokuapp.com/)
 
 ## Table of Contents
-### [User Experience](#user-experience)
+### [User Experience](#user-experience-1)
 * [Project Goals](#project-goals)
 * [Agile Methodology](#agile-methodology)
 * [User Stories](#user-stories)
@@ -45,7 +45,7 @@ Our Django based website is a platform for users to explore and book a wide rang
 
 ## User Experience
 
-Our website offers the user intuitive navigation, eye catching visuals, and a quick and easy booking process. Oasis Hotels website can be accessed on a range of devices making it easy to make a booking on the device of your choice. Discover your next holiday destination with Oasis Hotels here to make that proccess as enjoyable and stress free as possible.
+Our website offers the user intuitive navigation, eye catching visuals, and a quick and easy booking process. Oasis Hotels website can be accessed on a range of devices making it easy to make a booking on the device of your choice. Discover your next holiday destination with Oasis Hotels who are here to make that proccess as enjoyable and stress free as possible.
 
 ### Project Goals
 
