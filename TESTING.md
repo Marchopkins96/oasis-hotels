@@ -7,7 +7,7 @@ Comprehensive testing has been performed to ensure the website's functionality m
 ## Table of Contents
 
 ### [Responsiveness Testing](#responsiveness-testing-1)
-### [Browser and Device Compatibility Testing](#browser-and-device-compatibility-testing)
+### [Browser and Device Compatibility Testing](#browser-and-device-compatibility-testing-1)
 ### [Code Validation](#code-validation-1)
 * [HTML Validation](#html-validation)
 * [CSS Validation](#css-validation)
