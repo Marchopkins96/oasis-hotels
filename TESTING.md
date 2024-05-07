@@ -1,8 +1,21 @@
 # Welcome to Oasis Hotels Testing 
 
-Return to [README](#README.md)
+Return to [README](README.md)
 
 Comprehensive testing has been performed to ensure the website's functionality meets expectations.
+
+## Table of Contents
+
+### [Responsiveness Testing](#responsiveness-testing-1)
+### [Browser and Device Compatibility Testing](#browser-and-device-compatibility-testing)
+### [Code Validation](#code-validation-1)
+* [HTML Validation](#html-validation)
+* [CSS Validation](#css-validation)
+* [JavaScript Validation](#javascript-validation)
+* [Python Validation](#python-validation)
+### [Lighthouse Report](#lighthouse-report-1)
+### [Bugs](#bugs-1)
+### [Site Features Testing](#site-features-testing-1)
 
 ## Responsiveness Testing
 
