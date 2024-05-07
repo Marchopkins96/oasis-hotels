@@ -177,3 +177,67 @@ The site functions as expected on all of the above browsers. I have tested the s
 
 ![Make a Booking Inline Script](documentation/validation/make-booking-js-validation.png)
 </details>
+
+### Python Validation 
+
+#### hotel_bookings app
+
+<details>
+<summary> admin.py
+</summary>
+
+![admin.py](documentation/validation/admin.py-validation.png)
+</details>
+
+<details>
+<summary> forms.py
+</summary>
+
+![forms.py](documentation/validation/forms.py-validation.png)
+</details>
+
+<details>
+<summary> models.py
+</summary>
+
+![models.py](documentation/validation/models.py-val.png)
+</details>
+
+<details>
+<summary> views.py
+</summary>
+
+![views.py](documentation/validation/views.py-validation.png)
+</details>
+
+<details>
+<summary> urls.py
+</summary>
+
+![urls.py](documentation/validation/urls.py-validation.png)
+</details>
+
+#### oasis_hotels app
+
+<details>
+<summary> settings.py
+</summary>
+
+![settings.py](documentation/validation/settings.py-validation.png)
+</details>
+
+<details>
+<summary> urls.py
+</summary>
+
+![urls.py](documentation/validation/oasis-urls.py-validation.png)
+</details>
+
+## Lighthouse Report
+
+<details>
+<summary> Home Page
+</summary>
+
+![Home Page](documentation/lighthouse_report/home-lighthouse.PNG)
+</details>
