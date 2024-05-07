@@ -239,5 +239,83 @@ The site functions as expected on all of the above browsers. I have tested the s
 <summary> Home Page
 </summary>
 
-![Home Page](documentation/lighthouse_report/home-lighthouse.PNG)
+![Home Page](documentation/lighthouse/lighthouse-homepage.png)
 </details>
+
+<details>
+<summary> Home Page Logged in
+</summary>
+
+![Home Page Logged in](documentation/lighthouse/lighthouse-homepage-logged-in.png)
+</details>
+
+<details>
+<summary> Contact Page
+</summary>
+
+![Contact Page](documentation/lighthouse/lighthouse-contact.png)
+</details>
+
+<details>
+<summary> Sign Up Page
+</summary>
+
+![Sign Up Page](documentation/lighthouse/lighthouse-signup.png)
+</details>
+
+<details>
+<summary> Login Page
+</summary>
+
+![Login Page](documentation/lighthouse/lighthouse-login.png)
+</details>
+
+<details>
+<summary> Logout Page
+</summary>
+
+![Logout Page](documentation/lighthouse/lighthouse-logout.png)
+</details>
+
+<details>
+<summary> Browse Hotels Page
+</summary>
+
+![Browse Hotels Page](documentation/lighthouse/lighthouse-browse-hotels.png)
+</details>
+
+<details>
+<summary> Make a Booking Page
+</summary>
+
+![Make a Booking Page](documentation/lighthouse/lighthouse-make-booking.png)
+</details>
+
+<details>
+<summary> Booking Success Page
+</summary>
+
+![Booking Success Page](documentation/lighthouse/lighthouse-booking-success.png)
+</details>
+
+<details>
+<summary> Booking Overview Page
+</summary>
+
+![Booking Overview Page](documentation/lighthouse/lighthouse-booking-overview.png)
+</details>
+
+<details>
+<summary> Edit Booking Page
+</summary>
+
+![Edit Booking Page](documentation/lighthouse/lighthouse-edit-booking.png)
+</details>
+
+<details>
+<summary> Delete Page
+</summary>
+
+![Delete Page](documentation/lighthouse/lighthouse-delete-booking.png)
+</details>
+
