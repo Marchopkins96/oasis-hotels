@@ -51,7 +51,7 @@ The deployed website underwent testing on multiple devices and screen sizes to e
 ![Mobile](documentation/validation/mobile.png)
 </details>
 
-## Browser  and Device Compatibility Testing
+## Browser and Device Compatibility Testing
 
 The project was tested on multiple web browsers to check for compatibility issues and ensure it functions as expected no matter the browser used. This testing process ensures that users will have a smooth and consistent user experience.
 
